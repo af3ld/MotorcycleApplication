@@ -11,6 +11,9 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String API_KEY = "AIzaSyC2WPTne8JjQTUEmW5ck9ymeiZFJ3LQjL0";
+    public static final String API_KEY_TITLE = "Android_Maps_key_1";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
