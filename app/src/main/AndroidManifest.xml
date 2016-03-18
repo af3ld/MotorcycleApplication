@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lclark.motorcycleap">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <meta-data
+        android:name="com.google.android.geo.Android_Maps_key_1"
+        android:value="AIzaSyC2WPTne8JjQTUEmW5ck9ymeiZFJ3LQjL0" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,7 +23,12 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+
         </activity>
+
     </application>
 
 </manifest>
+
+
