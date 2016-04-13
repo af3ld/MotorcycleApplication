@@ -16,26 +16,27 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, View.OnClickListener {
 
     public static final String API_KEY = "AIzaSyC2WPTne8JjQTUEmW5ck9ymeiZFJ3LQjL0";
     public static final String API_KEY_TITLE = "Android_Maps_key_1";
     public static final String TAG = MainActivity.class.getSimpleName();
-    private GoogleMap googleMap;
+    private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
         initializeMap();
 
         // SENSOR LOGIC: RYAN
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         Sensor gravitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
-        sensorManager.registerListener(new LeanAngleCalculator() ,gravitySensor, sensorManager.SENSOR_DELAY_FASTEST  );
+        sensorManager.registerListener(new LeanAngleCalculator(), gravitySensor, sensorManager.SENSOR_DELAY_FASTEST);
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -56,12 +57,9 @@ public class MainActivity extends AppCompatActivity {
      * Creates new version if map is not null
      */
     private void initializeMap() {
-        if (googleMap == null) {
-            googleMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.fragment_map)).getMap();
-            if (googleMap == null) {
-                Toast.makeText(getApplicationContext(), "Unable to create maps", Toast.LENGTH_SHORT).show();
-            }
-        }
+            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.fragment_map);
+            mapFragment.getMapAsync(this);
     }
 
 
@@ -85,5 +83,17 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        mMap.getUiSettings().setMyLocationButtonEnabled(true);
+        mMap.getUiSettings().setMapToolbarEnabled(true);
     }
 }
