@@ -25,12 +25,12 @@ public class MainActivity extends AppCompatActivity{
     public static final String API_KEY_TITLE = "Android_Maps_key_1";
     public static final String TAG = MainActivity.class.getSimpleName();
     private GoogleMap mMap;
+    private Boolean isRideTracking = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         setUpViewPager();
 
 
@@ -45,9 +45,12 @@ public class MainActivity extends AppCompatActivity{
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Start recording ride
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                if (!isRideTracking){
+                    Snackbar.make(view, "Ride begun", Snackbar.LENGTH_SHORT).show();
+                    isRideTracking = true;
+                } else {
+                    Snackbar.make(view, "Ride over", Snackbar.LENGTH_SHORT).show();
+                }
             }
         });
     }
