@@ -28,10 +28,8 @@ public class TabAdapter extends FragmentPagerAdapter {
         @ColorInt int[] colors = {
                 Color.BLUE, Color.GREEN, Color.RED
         };
-        if (position == 1) {
-            MapFragment.newInstance(colors[position], position, new LatLng(-34, 151));
-        }
-        return TabFragment.newInstance(colors[position], position);
+
+        return MapFragment.newInstance(colors[position], position, new LatLng(-34, 151));
 
 
     }

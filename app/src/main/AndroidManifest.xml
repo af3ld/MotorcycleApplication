@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <meta-data
-        android:name="com.google.android.geo.Android_Maps_key_1"
+        android:name="com.google.android.maps.v2.API_KEY"
         android:value="AIzaSyC2WPTne8JjQTUEmW5ck9ymeiZFJ3LQjL0" />
     <meta-data
         android:name="com.google.android.gms.version"
