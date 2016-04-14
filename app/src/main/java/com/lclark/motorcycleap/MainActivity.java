@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity{
                     isRideTracking = true;
                 } else {
                     Snackbar.make(view, "Ride over", Snackbar.LENGTH_SHORT).show();
+                    isRideTracking = false;
                 }
             }
         });
