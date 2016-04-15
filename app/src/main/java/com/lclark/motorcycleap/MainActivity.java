@@ -3,6 +3,8 @@ package com.lclark.motorcycleap;
 
 import android.content.Context;
 import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,10 +15,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 
 
-public class MainActivity extends AppCompatActivity{
-
+public class MainActivity extends AppCompatActivity {
+TextView speedometer;
     public static final String API_KEY = "AIzaSyC2WPTne8JjQTUEmW5ck9ymeiZFJ3LQjL0";
     public static final String API_KEY_TITLE = "Android_Maps_key_1";
     public static final String TAG = MainActivity.class.getSimpleName();
@@ -28,10 +31,6 @@ public class MainActivity extends AppCompatActivity{
         setUpViewPager();
 
 
-        // SENSOR LOGIC: RYAN
-        SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        Sensor gravitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
-        sensorManager.registerListener(new LeanAngleCalculator(), gravitySensor, sensorManager.SENSOR_DELAY_FASTEST);
     }
 
 
@@ -46,5 +45,6 @@ public class MainActivity extends AppCompatActivity{
         Toolbar toolbar = (Toolbar) findViewById(R.id.activity_main_toolbar);
         setSupportActionBar(toolbar);
     }
+
 
 }
