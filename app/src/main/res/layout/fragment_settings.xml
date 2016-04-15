@@ -5,6 +5,7 @@
     android:layout_height="match_parent">
 
 <EditText
+    android:inputType="textCapSentences"
     android:textColor="@color/settingsText"
     android:textColorHint="@color/settingsHintText"
     android:paddingTop="75dp"
@@ -59,7 +60,7 @@ android:paddingLeft="60dp"
         android:layout_height="wrap_content" />
 
     <Button
-        
+
         android:background="@color/settingsButtonColor"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
@@ -76,7 +77,7 @@ android:paddingLeft="60dp"
         android:paddingRight="70dp"
         android:paddingLeft="70dp"
         android:layout_alignParentRight="true"
-        android:id="@+id/fragment_settings_clear"
+        android:id="@+id/fragment_settings_clear_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="CLEAR"/>
