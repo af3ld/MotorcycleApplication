@@ -1,35 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:background="#2b2b2b"
     android:layout_height="match_parent">
 
 <EditText
+    android:textColor="@color/settingsText"
+    android:textColorHint="@color/settingsHintText"
+    android:paddingTop="75dp"
     android:id="@+id/fragment_settings_make_edittext"
     android:hint="Make"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" />
 
     <EditText
+        android:textColor="@color/settingsText"
+        android:textColorHint="@color/settingsHintText"
+        android:layout_below="@id/fragment_settings_make_edittext"
         android:id="@+id/fragment_settings_model_edittext"
         android:hint="Model"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <EditText
+        android:textColor="@color/settingsText"
+        android:textColorHint="@color/settingsHintText"
+        android:layout_centerInParent="true"
+        android:paddingTop="100dp"
+        android:layout_below="@id/fragment_settings_model_edittext"
         android:id="@+id/fragment_settings_tires_edittext"
         android:hint="Tires"
-        android:layout_width="match_parent"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <EditText
+        android:textColor="@color/settingsText"
+        android:textColorHint="@color/settingsHintText"
+        android:layout_alignParentRight="true"
+        android:paddingRight="60dp"
+        android:paddingLeft="60dp"
+        android:layout_below="@id/fragment_settings_tires_edittext"
         android:id="@+id/fragment_settings_psi_front_edittext"
         android:hint="Front Psi"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <EditText
+        android:textColor="@color/settingsText"
+        android:textColorHint="@color/settingsHintText"
+        android:paddingRight="60dp"
+android:paddingLeft="60dp"
+        android:layout_below="@id/fragment_settings_tires_edittext"
         android:id="@+id/fragment_settings_psi_back_edittext"
         android:hint="Back Psi"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-</LinearLayout>
+
+    <Button
+        
+        android:background="@color/settingsButtonColor"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:paddingRight="70dp"
+        android:paddingLeft="70dp"
+        android:id="@+id/fragment_settings_save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SAVE"/>
+
+    <Button
+        android:background="@color/settingsButtonColor"
+        android:layout_alignParentBottom="true"
+        android:paddingRight="70dp"
+        android:paddingLeft="70dp"
+        android:layout_alignParentRight="true"
+        android:id="@+id/fragment_settings_clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CLEAR"/>
+</RelativeLayout>
