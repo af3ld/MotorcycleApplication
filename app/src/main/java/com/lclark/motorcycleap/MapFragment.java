@@ -48,8 +48,8 @@ public class MapFragment extends Fragment implements  OnMapReadyCallback{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_map, container, false);
-       SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager()
-               .findFragmentById(R.id.map_fragment);
+       MapView mapFragment = (MapView) rootView.findViewById(R.id.map_fragment);
+        mapFragment.onCreate(savedInstanceState);
         mapFragment.getMapAsync(this);
 
 
@@ -66,5 +66,11 @@ public class MapFragment extends Fragment implements  OnMapReadyCallback{
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
         mMap.addMarker(new MarkerOptions().position(startingLatLng));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(startingLatLng));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        
     }
 }
