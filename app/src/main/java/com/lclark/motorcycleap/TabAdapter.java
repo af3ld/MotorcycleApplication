@@ -14,6 +14,10 @@ import com.google.android.gms.maps.model.LatLng;
  */
 public class TabAdapter extends FragmentPagerAdapter {
 
+    private final int SETTINGS = 0;
+    private final int MAIN = 1;
+    private final int STATS = 2;
+
     private final Context mContext;
 
 
@@ -28,10 +32,22 @@ public class TabAdapter extends FragmentPagerAdapter {
         @ColorInt int[] colors = {
                 Color.BLUE, Color.GREEN, Color.RED
         };
-
-        return MapFragment.newInstance(colors[position], position, new LatLng(-34, 151));
-
-
+        switch (position){
+            case SETTINGS:
+                return TabFragment.newInstance(colors[position], position);
+            case MAIN:
+                return MapFragment.newInstance(colors[position], position, new LatLng(-34, 151));
+            default:
+                return TabFragment.newInstance(colors[position], position);
+        }
+//
+//        if (position == SETTINGS) {
+//            return TabFragment.newInstance(colors[position], position);
+//        } else if (position == MAIN) {
+//            return MapFragment.newInstance(colors[position], position, new LatLng(-34, 151));
+//        } else {
+//         return TabFragment.newInstance(colors[position], )
+//        }
     }
 
     @Override
@@ -41,8 +57,8 @@ public class TabAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return (position == 0) ? mContext.getString(R.string.settings_page_title) :
-                (position == 1) ? mContext.getString(R.string.main_page_title) :
+        return (position == SETTINGS) ? mContext.getString(R.string.settings_page_title) :
+                (position == MAIN) ? mContext.getString(R.string.main_page_title) :
                         mContext.getString(R.string.stats_page_title);
 
     }

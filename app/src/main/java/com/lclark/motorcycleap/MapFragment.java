@@ -1,9 +1,12 @@
 package com.lclark.motorcycleap;
 
 
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,6 +34,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private MapView mapFragment;
     private GoogleMap mMap;
     private LatLng startingLatLng;
+    private Boolean isRideTracking = false;
+
 
 
     public static MapFragment newInstance(@ColorInt int color, int index, LatLng latLng) {
@@ -47,10 +52,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_map, container, false);
+        setUpFAB(rootView);
         mapFragment = (MapView) rootView.findViewById(R.id.map_fragment);
         mapFragment.onCreate(savedInstanceState);
         mapFragment.getMapAsync(this);
-        
+
         Bundle args = getArguments();
         int index = args.getInt(ARG_INDEX);
         startingLatLng = args.getParcelable(ARG_LOCATION);
@@ -58,12 +64,31 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         return rootView;
     }
 
+    /*
+    * Sets up the Floating action button with an onclick*/
+    public void setUpFAB(View rootView){
+        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!isRideTracking){
+                    Snackbar.make(view, "Ride begun", Snackbar.LENGTH_SHORT).show();
+                    isRideTracking = true;
+                } else {
+                    Snackbar.make(view, "Ride over", Snackbar.LENGTH_SHORT).show();
+                    isRideTracking = false;
+                }
+            }
+        });
+    }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
+        mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
         mMap.addMarker(new MarkerOptions().position(startingLatLng));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(startingLatLng));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startingLatLng, 15));
     }
 
     @Override

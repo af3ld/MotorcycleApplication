@@ -31,9 +31,7 @@ public class TabFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_tab, container, false);
-
         Bundle args = getArguments();
-
         int index = args.getInt(ARG_INDEX);
         Log.d(TAG, "Fragment at " + index);
         return rootView;
