@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +26,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     EditText tires;
     EditText frontPsi;
     EditText backPsi;
-Button save;
+    Button save;
     Button clear;
     public static final String TAG = SettingsFragment.class.getSimpleName();
     public static final String ARG_COLOR = "Color";
@@ -55,20 +56,21 @@ Button save;
 
     @Override
     public void onClick(View v) {
-if (v.getId() == R.id.fragment_settings_save_button){
-makeCheck(make.getText().toString());
-}
+        if (v.getId() == R.id.fragment_settings_save_button) {
+            makeCheck(make.getText().toString());
+        }
 
     }
 
-    void makeCheck( String makeString){
+    void makeCheck(String makeString) {
         makeString = makeString.toLowerCase();
-        makeString = makeString.replaceAll("\\s+","");
-if (makeString.equals("kawasaki")) {
-            make.setTextColor(Color.parseColor("#4AF400") );
+        makeString = makeString.replaceAll("\\s+", "");
+        if (makeString.equals("kawasaki")) {
+            make.setTextColor(Color.parseColor("#4AF400"));
+//            make.setTextColor(ContextCompat.getColor(getContext(), R.color.kawasakiTextColor));
         }
         if (makeString.equals("ktm")) {
-            make.setTextColor(Color.parseColor("#f27620") );
+            make.setTextColor(Color.parseColor("#f27620"));
         }
 
         if (makeString.equals("suzuki")) {
@@ -78,18 +80,18 @@ if (makeString.equals("kawasaki")) {
             make.setTextColor(Color.parseColor("#FF0000"));
         }
 
-            if (makeString.equals("honda")) {
-                make.setTextColor(Color.parseColor("#f7db22") );
-            }
+        if (makeString.equals("honda")) {
+            make.setTextColor(Color.parseColor("#f7db22"));
+        }
 
         if (makeString.equals("yamaha")) {
-            make.setTextColor(Color.parseColor("#0c06d8") );
+            make.setTextColor(Color.parseColor("#0c06d8"));
 
         }
     }
 
     @Override
-    public void onActivityCreated( Bundle savedInstanceState) {
+    public void onActivityCreated(Bundle savedInstanceState) {
 
         make = (EditText) getActivity().findViewById(R.id.fragment_settings_make_edittext);
         model = (EditText) getActivity().findViewById(R.id.fragment_settings_model_edittext);

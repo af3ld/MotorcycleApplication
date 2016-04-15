@@ -8,5 +8,5 @@
     <color name="settingsButtonColor">#878787</color>
     <color name="settingsText">#e0e0e0</color>
     <color name="background">#2b2b2b</color>
-
+    <color name="kawasakiTextColor">#4AF400</color>
 </resources>

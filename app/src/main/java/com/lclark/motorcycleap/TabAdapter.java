@@ -40,14 +40,6 @@ public class TabAdapter extends FragmentPagerAdapter {
             default:
                 return RiderStatisticsFragment.newInstance(colors[position], position);
         }
-//
-//        if (position == SETTINGS) {
-//            return TabFragment.newInstance(colors[position], position);
-//        } else if (position == MAIN) {
-//            return MapFragment.newInstance(colors[position], position, new LatLng(-34, 151));
-//        } else {
-//         return TabFragment.newInstance(colors[position], )
-//        }
     }
 
     @Override
