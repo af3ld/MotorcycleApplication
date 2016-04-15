@@ -1,6 +1,7 @@
 package com.lclark.motorcycleap;
 
 
+
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
@@ -13,19 +14,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.Map;
 
 /**
  * Created by alexfeldman on 4/13/16.
  */
-public class MapFragment extends Fragment implements OnMapReadyCallback {
+public class MapFragment extends Fragment implements OnMapReadyCallback{
 
     public static final String TAG = MapFragment.class.getSimpleName();
     public static final String ARG_COLOR = "Color";
@@ -35,7 +33,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private GoogleMap mMap;
     private LatLng startingLatLng;
     private Boolean isRideTracking = false;
-
 
 
     public static MapFragment newInstance(@ColorInt int color, int index, LatLng latLng) {
@@ -66,12 +63,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     /*
     * Sets up the Floating action button with an onclick*/
-    public void setUpFAB(View rootView){
+    public void setUpFAB(View rootView) {
         FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!isRideTracking){
+                if (!isRideTracking) {
                     Snackbar.make(view, "Ride begun", Snackbar.LENGTH_SHORT).show();
                     isRideTracking = true;
                 } else {
@@ -85,11 +82,16 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.getUiSettings().setMyLocationButtonEnabled(true);
+        mMap.getUiSettings().setMyLocationButtonEnabled(false);
         mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
-        mMap.addMarker(new MarkerOptions().position(startingLatLng));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startingLatLng, 15));
+
+//        mMap.addMarker(new MarkerOptions().position(startingLatLng));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startingLatLng, 15));
     }
+
+    public void setUpLocation(){
+    }
+
 
     @Override
     public void onResume() {
