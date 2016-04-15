@@ -34,7 +34,7 @@ public class TabAdapter extends FragmentPagerAdapter {
         };
         switch (position){
             case SETTINGS:
-                return TabFragment.newInstance(colors[position], position);
+                return SettingsFragment.newInstance(colors[position], position);
             case MAIN:
                 return MapFragment.newInstance(colors[position], position, new LatLng(-34, 151));
             default:

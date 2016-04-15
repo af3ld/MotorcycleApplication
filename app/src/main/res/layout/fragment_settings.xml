@@ -4,26 +4,31 @@
     android:layout_height="match_parent">
 
 <EditText
+    android:id="@+id/fragment_settings_make_edittext"
     android:hint="Make"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" />
 
     <EditText
+        android:id="@+id/fragment_settings_model_edittext"
         android:hint="Model"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <EditText
+        android:id="@+id/fragment_settings_tires_edittext"
         android:hint="Tires"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <EditText
+        android:id="@+id/fragment_settings_psi_front_edittext"
         android:hint="Front Psi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <EditText
+        android:id="@+id/fragment_settings_psi_back_edittext"
         android:hint="Back Psi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
