@@ -3,4 +3,28 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+<EditText
+    android:hint="Make"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+
+    <EditText
+        android:hint="Model"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:hint="Tires"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:hint="Front Psi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:hint="Back Psi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>
