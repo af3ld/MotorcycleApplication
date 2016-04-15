@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -39,12 +40,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Locatio
 
     private MapView mapFragment;
     private GoogleMap mMap;
-    private LatLng startingLatLng;
     private Boolean isRideTracking = false;
     Polyline polylineFinal;
     private List<Polyline> polylines = new ArrayList<Polyline>();
-    protected LocationManager locationManager;
-    protected LocationListener locationListener;
+
 
 
     public static MapFragment newInstance(@ColorInt int color, int index, LatLng latLng) {
@@ -66,12 +65,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Locatio
         mapFragment.onCreate(savedInstanceState);
         mapFragment.getMapAsync(this);
 
-        locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-
         Bundle args = getArguments();
         int index = args.getInt(ARG_INDEX);
-        startingLatLng = args.getParcelable(ARG_LOCATION);
         Log.d(TAG, "Fragment at " + index);
         return rootView;
     }
@@ -100,7 +95,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Locatio
         mMap = googleMap;
         mMap.getUiSettings().setMyLocationButtonEnabled(false);
         mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
-
 
 
 //        mMap.addMarker(new MarkerOptions().position(startingLatLng));
@@ -141,8 +135,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Locatio
     public void onDestroy() {
         super.onDestroy();
         mapFragment.onDestroy();
-        locationManager.removeUpdates(this);
-        locationManager = null;
     }
 
     @Override
@@ -170,4 +162,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Locatio
     public void onProviderDisabled(String provider) {
 
     }
+
+
 }
