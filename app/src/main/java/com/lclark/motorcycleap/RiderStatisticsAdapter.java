@@ -1,11 +1,15 @@
 package com.lclark.motorcycleap;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -19,9 +23,11 @@ public class RiderStatisticsAdapter extends BaseAdapter {
         TextView title;
     }
 
+
     public RiderStatisticsAdapter(Context context) {
         mContext = context;
     }
+
 
     @Override
     public int getCount() {
@@ -30,7 +36,7 @@ public class RiderStatisticsAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return 0;
     }
 
     @Override

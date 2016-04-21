@@ -45,8 +45,11 @@ public class RiderStatisticsFragment extends Fragment implements SensorEventList
         int index = args.getInt(ARG_INDEX);
         Log.d(TAG, "Fragment at " + index);
 
+        rootView.setTag(TAG);
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.fragment_rider_stats_recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        LinearLayoutManager llm = new LinearLayoutManager(mContext);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(llm);
 
         RiderStatisticsAdapter mAdapter = new RiderStatisticsAdapter(mContext);
         recyclerView.setAdapter(mAdapter);
