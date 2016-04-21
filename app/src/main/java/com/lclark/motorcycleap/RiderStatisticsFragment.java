@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 /**
@@ -46,14 +47,10 @@ public class RiderStatisticsFragment extends Fragment implements SensorEventList
         Log.d(TAG, "Fragment at " + index);
 
         rootView.setTag(TAG);
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.fragment_rider_stats_recyclerView);
-        LinearLayoutManager llm = new LinearLayoutManager(mContext);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(llm);
+        ListView listView = (ListView) rootView.findViewById(R.id.fragment_rider_stats_listView);
 
         RiderStatisticsAdapter mAdapter = new RiderStatisticsAdapter(mContext);
-        recyclerView.setAdapter(mAdapter);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        listView.setAdapter(mAdapter);
 
         return rootView;
 
