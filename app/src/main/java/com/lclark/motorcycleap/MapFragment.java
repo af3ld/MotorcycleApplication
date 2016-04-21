@@ -22,10 +22,12 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
@@ -46,7 +48,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Locatio
     public static final String ARG_INDEX = "Index";
     public static final String ARG_LOCATION = "Location";
 
-    private Context mContext;
+    private Context mContext = getContext();
     private MapView mapFragment;
     private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
@@ -116,10 +118,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Locatio
         mMap = googleMap;
         mMap.getUiSettings().setMyLocationButtonEnabled(false);
         mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
-
-
-//        mMap.addMarker(new MarkerOptions().position(startingLatLng));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startingLatLng, 15));
     }
 
     public void polylinesUpdate() {
@@ -222,5 +220,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Locatio
 
     private void handleNewLocation(Location location) {
         Log.d(TAG, location.toString());
+        double currentLatitude = location.getLatitude();
+        double currentLongitude = location.getLongitude();
+        LatLng latLng = new LatLng(currentLatitude, currentLongitude);
+        MarkerOptions options = new MarkerOptions()
+                .position(latLng)
+                .alpha((float) 0.8);
+        mMap.addMarker(options);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
     }
 }
