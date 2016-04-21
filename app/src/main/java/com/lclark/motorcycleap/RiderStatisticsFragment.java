@@ -8,6 +8,9 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +24,7 @@ public class RiderStatisticsFragment extends Fragment implements SensorEventList
 
     TextView speedometer;
 
-
+    public Context mContext;
     public static final String TAG = RiderStatisticsFragment.class.getSimpleName();
     public static final String ARG_COLOR = "Color";
     public static final String ARG_INDEX = "Index";
@@ -41,7 +44,15 @@ public class RiderStatisticsFragment extends Fragment implements SensorEventList
         Bundle args = getArguments();
         int index = args.getInt(ARG_INDEX);
         Log.d(TAG, "Fragment at " + index);
-                return rootView;
+
+        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.fragment_rider_stats_recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        RiderStatisticsAdapter mAdapter = new RiderStatisticsAdapter(mContext);
+        recyclerView.setAdapter(mAdapter);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        return rootView;
 
     }
 

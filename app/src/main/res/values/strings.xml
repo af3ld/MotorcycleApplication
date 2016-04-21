@@ -5,4 +5,6 @@
     <string name="settings_page_title">Settings</string>
     <string name="main_page_title">Main</string>
     <string name="stats_page_title">Rider Statistics</string>
+    <string name="GPS_disabled">GPS is currently Disabled</string>
+    <string name="GPS_message">Would you like to enable it?</string>
 </resources>

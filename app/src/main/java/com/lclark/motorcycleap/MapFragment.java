@@ -1,10 +1,9 @@
 package com.lclark.motorcycleap;
 
-import android.content.Context;
-import android.graphics.Color;
+
 import android.location.Location;
 import android.location.LocationListener;
-import android.location.LocationManager;
+
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
@@ -15,7 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -68,6 +67,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Locatio
         Bundle args = getArguments();
         int index = args.getInt(ARG_INDEX);
         Log.d(TAG, "Fragment at " + index);
+
+        GpsLocation mGPS = new GpsLocation(getContext());
+        if (mGPS.canGetLocation){
+
+        }
         return rootView;
     }
 

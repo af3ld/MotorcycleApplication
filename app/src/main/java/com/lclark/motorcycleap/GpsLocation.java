@@ -1,14 +1,19 @@
 package com.lclark.motorcycleap;
 
+import android.app.AlertDialog;
 import android.app.Service;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
+import android.media.audiofx.BassBoost;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.widget.Toast;
 
 import com.google.android.gms.location.LocationListener;
@@ -23,14 +28,14 @@ public class GpsLocation extends Service implements android.location.LocationLis
     protected LocationManager locationManager;
     private boolean isGpsEnabled = false;
     private boolean isNetworkEnabled = false;
-    private boolean canGetLocation = false;
+    public boolean canGetLocation = false;
     private Location mLocation;
     private double mLatitude;
     private double mLongitude;
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATE = 5;
     /**
      * min time for location update
-     * 60000 = 1min
+     * 60000 = 1min, 5000 = 5 seconds
      */
     private static final long MIN_TIME_FOR_UPDATE = 5000;
 
@@ -84,6 +89,28 @@ public class GpsLocation extends Service implements android.location.LocationLis
         return mLocation;
     }
 
+    public void GpsAlert(){
+        AlertDialog.Builder mAlertD = new AlertDialog.Builder(new ContextThemeWrapper(mContext, R.style.AppTheme));
+        mAlertD.setTitle(R.string.GPS_disabled);
+        mAlertD.setMessage(R.string.GPS_message);
+        mAlertD.setPositiveButton("settings", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                mContext.startActivity(intent);
+            }
+        });
+
+        mAlertD.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        mAlertD.create().show();
+    }
+
+
     public boolean isCanGetLocation() {
         return canGetLocation;
     }
@@ -100,6 +127,12 @@ public class GpsLocation extends Service implements android.location.LocationLis
             mLongitude = mLocation.getLatitude();
         }
         return mLongitude;
+    }
+
+    public void stopUsingGps() {
+        if (locationManager != null) {
+            locationManager.removeUpdates(GpsLocation.this);
+        }
     }
 
     @Override
