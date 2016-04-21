@@ -1,6 +1,8 @@
 package com.lclark.motorcycleap;
 
 
+import android.content.Context;
+import android.content.IntentSender;
 import android.location.Location;
 import android.location.LocationListener;
 
@@ -16,6 +18,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -30,19 +36,24 @@ import java.util.List;
 /**
  * Created by alexfeldman on 4/13/16.
  */
-public class MapFragment extends Fragment implements OnMapReadyCallback, LocationListener {
+public class MapFragment extends Fragment implements OnMapReadyCallback, LocationListener,
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     public static final String TAG = MapFragment.class.getSimpleName();
+    private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
+    private final static int milliseconds = 1000;
     public static final String ARG_COLOR = "Color";
     public static final String ARG_INDEX = "Index";
     public static final String ARG_LOCATION = "Location";
 
+    private Context mContext;
     private MapView mapFragment;
     private GoogleMap mMap;
+    private GoogleApiClient mGoogleApiClient;
+    private LocationRequest mLocationRequest;
     private Boolean isRideTracking = false;
     Polyline polylineFinal;
     private List<Polyline> polylines = new ArrayList<Polyline>();
-
 
 
     public static MapFragment newInstance(@ColorInt int color, int index, LatLng latLng) {
@@ -67,11 +78,17 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Locatio
         Bundle args = getArguments();
         int index = args.getInt(ARG_INDEX);
         Log.d(TAG, "Fragment at " + index);
+        mGoogleApiClient = new GoogleApiClient.Builder(mContext)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+        mLocationRequest = LocationRequest.create()
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                .setInterval(10 * milliseconds)
+                .setFastestInterval(1 * milliseconds);
 
-        GpsLocation mGPS = new GpsLocation(getContext());
-        if (mGPS.canGetLocation){
 
-        }
         return rootView;
     }
 
@@ -126,12 +143,16 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Locatio
     @Override
     public void onResume() {
         super.onResume();
+        mGoogleApiClient.connect();
         mapFragment.onResume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        if (mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.disconnect();
+        }
         mapFragment.onPause();
     }
 
@@ -149,6 +170,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Locatio
 
     @Override
     public void onLocationChanged(Location location) {
+        handleNewLocation(location);
         Log.d(TAG, "Location: " + location.getLatitude() + ", " + location.getLongitude());
     }
 
@@ -168,4 +190,37 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Locatio
     }
 
 
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        Log.i(TAG, getString(R.string.location_success));
+        Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        if (location == null) {
+
+        } else {
+            handleNewLocation(location);
+        }
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        Log.i(TAG, getString(R.string.location_disconnect));
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+        if (connectionResult.hasResolution()) {
+            try {
+                connectionResult.startResolutionForResult(getActivity(), CONNECTION_FAILURE_RESOLUTION_REQUEST);
+            } catch (IntentSender.SendIntentException e) {
+                Log.e(TAG, e.getLocalizedMessage());
+            }
+        } else {
+            Log.i(TAG, String.format(
+                    getString(R.string.location_failure), connectionResult.getErrorCode()));
+        }
+    }
+
+    private void handleNewLocation(Location location) {
+        Log.d(TAG, location.toString());
+    }
 }

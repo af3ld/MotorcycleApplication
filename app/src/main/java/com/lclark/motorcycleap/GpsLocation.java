@@ -26,8 +26,6 @@ public class GpsLocation extends Service implements android.location.LocationLis
     public static final String TAG = GpsLocation.class.getSimpleName();
     private Context mContext;
     protected LocationManager locationManager;
-    private boolean isGpsEnabled = false;
-    private boolean isNetworkEnabled = false;
     public boolean canGetLocation = false;
     private Location mLocation;
     private double mLatitude;
@@ -54,8 +52,8 @@ public class GpsLocation extends Service implements android.location.LocationLis
     public Location getLocation() {
         try {
             locationManager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
-            isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-            isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+            boolean isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            boolean isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
             if (!isGpsEnabled && !isNetworkEnabled) {
                 Toast.makeText(getApplicationContext(), getString(R.string.common_google_play_services_network_error_text), Toast.LENGTH_SHORT).show();
             } else {
