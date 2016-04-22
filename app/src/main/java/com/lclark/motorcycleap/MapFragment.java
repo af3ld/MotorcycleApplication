@@ -6,6 +6,7 @@ import android.content.IntentSender;
 import android.location.Location;
 import android.location.LocationListener;
 
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
@@ -20,6 +21,7 @@ import android.view.ViewGroup;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.FusedLocationProviderApi;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -38,7 +40,7 @@ import java.util.List;
 /**
  * Created by alexfeldman on 4/13/16.
  */
-public class MapFragment extends Fragment implements OnMapReadyCallback, LocationListener,
+public class MapFragment extends Fragment implements OnMapReadyCallback, com.google.android.gms.location.LocationListener,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     public static final String TAG = MapFragment.class.getSimpleName();
@@ -86,10 +88,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Locatio
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
-        mLocationRequest = LocationRequest.create()
+         mLocationRequest = LocationRequest.create()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
                 .setInterval(10 * milliseconds)
                 .setFastestInterval(milliseconds);
+
 
         return rootView;
     }
@@ -107,7 +110,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Locatio
                 } else {
                     Snackbar.make(view, "Ride over", Snackbar.LENGTH_SHORT).show();
                     isRideTracking = false;
-                    polylineFinal.remove();
                 }
             }
         });
@@ -172,31 +174,18 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Locatio
         Log.d(TAG, "Location: " + location.getLatitude() + ", " + location.getLongitude());
     }
 
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-
-    }
 
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         Log.i(TAG, getString(R.string.location_success));
-        Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-        if (location == null) {
-
-        } else {
-            handleNewLocation(location);
-        }
+        LocationServices.FusedLocationApi
+                .requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+//        if (location == null) {
+//            Log.e(TAG, getString(R.string.location_failure));
+//        } else {
+//            handleNewLocation(location);
+//        }
     }
 
     @Override
@@ -213,8 +202,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Locatio
                 Log.e(TAG, e.getLocalizedMessage());
             }
         } else {
-            Log.i(TAG, String.format(
-                    getString(R.string.location_failure), connectionResult.getErrorCode()));
+            Log.i(TAG, getString(R.string.location_failure) + connectionResult.getErrorCode());
         }
     }
 
