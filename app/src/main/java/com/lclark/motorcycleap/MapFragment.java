@@ -80,7 +80,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Locatio
         Bundle args = getArguments();
         int index = args.getInt(ARG_INDEX);
         Log.d(TAG, "Fragment at " + index);
-        mGoogleApiClient = new GoogleApiClient.Builder(mContext)
+
+        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
@@ -88,8 +89,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Locatio
         mLocationRequest = LocationRequest.create()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
                 .setInterval(10 * milliseconds)
-                .setFastestInterval(1 * milliseconds);
-
+                .setFastestInterval(milliseconds);
 
         return rootView;
     }
@@ -116,7 +116,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Locatio
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.getUiSettings().setMyLocationButtonEnabled(false);
+        mMap.getUiSettings().setMyLocationButtonEnabled(true);
         mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
     }
 

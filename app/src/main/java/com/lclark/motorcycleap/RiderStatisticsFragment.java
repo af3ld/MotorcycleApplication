@@ -49,7 +49,7 @@ public class RiderStatisticsFragment extends Fragment implements SensorEventList
         rootView.setTag(TAG);
         ListView listView = (ListView) rootView.findViewById(R.id.fragment_rider_stats_listView);
 
-        RiderStatisticsAdapter mAdapter = new RiderStatisticsAdapter(mContext);
+        RiderStatisticsAdapter mAdapter = new RiderStatisticsAdapter(getContext());
         listView.setAdapter(mAdapter);
 
         return rootView;
@@ -70,7 +70,8 @@ public class RiderStatisticsFragment extends Fragment implements SensorEventList
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        speedometer.setText( Float.toString(event.values[0]) );
+        speedometer.setText(String.format("%f", event.values[0]));
+//        speedometer.setText(Float.toString(event.values[0]));
 
     }
 

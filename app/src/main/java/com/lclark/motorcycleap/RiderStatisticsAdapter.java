@@ -45,6 +45,7 @@ public class RiderStatisticsAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
+
         ViewHolder viewHolder;
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.fragment_recyclerview_rider_stats, parent, false);

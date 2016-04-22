@@ -10,4 +10,5 @@
     <string name="location_success">Location services connected</string>
     <string name="location_disconnect">Location services suspended. Please reconnect</string>
     <string name="location_failure">Location services connection failed with code %d</string>
+    <string name="currentSpeed_hint">Current Speed</string>
 </resources>
