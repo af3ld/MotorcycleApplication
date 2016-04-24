@@ -19,7 +19,7 @@ import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity {
-TextView speedometer;
+
     public static final String API_KEY = "AIzaSyC2WPTne8JjQTUEmW5ck9ymeiZFJ3LQjL0";
     public static final String API_KEY_TITLE = "Android_Maps_key_1";
     public static final String TAG = MainActivity.class.getSimpleName();

@@ -59,8 +59,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
     private Boolean isRideTracking = false;
-    Polyline polylineFinal;
-    private List<Polyline> polylines = new ArrayList<Polyline>();
+    public ArrayList<LatLng> places;
+    private int placesIndex = 0;
 
 
     public static MapFragment newInstance(@ColorInt int color, int index, LatLng latLng) {
@@ -126,20 +126,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     }
 
     public void polylinesUpdate() {
-        PolylineOptions polylineOptions;
-
-//        loop {
-//
-//            polylineOptions.add( new LatLng( latitude, longitude ) );
-//
-//        }
-
-//        polylineOptions.width(2);
-//        polylineOptions.color(Color.BLUE);
-//        polylineOptions.geodesic(true);
-//
-//        polylineFinal = mMap.addPolyline(polylineOptions);
-
+        if (places.size() >= 2) {
+            Polyline line = mMap.addPolyline(new PolylineOptions()
+                    .add(places.get(placesIndex), places.get(placesIndex + 1))
+                    .width(2)
+                    .color(ContextCompat.getColor(mContext, R.color.pumpkin)));
+            placesIndex++;
+        }
     }
 
 
@@ -162,6 +155,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public void onDestroy() {
         super.onDestroy();
+
         mapFragment.onDestroy();
     }
 
@@ -215,5 +209,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                 .alpha((float) 0.8);
         mMap.addMarker(options);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
+        places.add(latLng);
+        polylinesUpdate();
     }
 }

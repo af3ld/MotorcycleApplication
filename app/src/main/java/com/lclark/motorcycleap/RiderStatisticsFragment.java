@@ -30,11 +30,10 @@ public class RiderStatisticsFragment extends Fragment implements SensorEventList
     public static final String ARG_COLOR = "Color";
     public static final String ARG_INDEX = "Index";
 
-    public static RiderStatisticsFragment newInstance(@ColorInt int color, int index) {
+    public static RiderStatisticsFragment newInstance(int index) {
 
         RiderStatisticsFragment fragment = new RiderStatisticsFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_COLOR, color);
         args.putInt(ARG_INDEX, index);
         fragment.setArguments(args);
         return fragment;
@@ -63,16 +62,12 @@ public class RiderStatisticsFragment extends Fragment implements SensorEventList
         Sensor gravitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
         sensorManager.registerListener(this, gravitySensor, sensorManager.SENSOR_DELAY_FASTEST);
         speedometer = (TextView) getActivity().findViewById(R.id.fragment_rider_stats_currentspeed_textView);
-
-
         super.onActivityCreated(savedInstanceState);
     }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
         speedometer.setText(String.format("%f", event.values[0]));
-//        speedometer.setText(Float.toString(event.values[0]));
-
     }
 
     @Override
