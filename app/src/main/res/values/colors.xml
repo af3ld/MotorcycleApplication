@@ -8,5 +8,10 @@
     <color name="settingsButtonColor">#878787</color>
     <color name="settingsText">#e0e0e0</color>
     <color name="background">#2b2b2b</color>
-    <color name="kawasakiTextColor">#4AF400</color>
+    
+    <color name="sand">#eab984</color>
+    <color name="pumpkin">#ee9847</color>
+    <color name="soft_tan">#ab6641</color>
+    <color name="medium_umber">#854323</color>
+    <color name="ink">#0b0304</color>
 </resources>

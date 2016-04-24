@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
@@ -40,7 +42,8 @@ import java.util.List;
 /**
  * Created by alexfeldman on 4/13/16.
  */
-public class MapFragment extends Fragment implements OnMapReadyCallback, com.google.android.gms.location.LocationListener,
+public class MapFragment extends Fragment implements OnMapReadyCallback,
+        com.google.android.gms.location.LocationListener,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     public static final String TAG = MapFragment.class.getSimpleName();
@@ -50,7 +53,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, com.goo
     public static final String ARG_INDEX = "Index";
     public static final String ARG_LOCATION = "Location";
 
-    private Context mContext = getContext();
+    private Context mContext;
     private MapView mapFragment;
     private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
@@ -93,7 +96,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, com.goo
                 .setInterval(10 * milliseconds)
                 .setFastestInterval(milliseconds);
 
-
         return rootView;
     }
 
@@ -101,6 +103,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, com.goo
     * Sets up the Floating action button with an onclick*/
     public void setUpFAB(View rootView) {
         FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
+        fab.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.sand));
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -181,11 +184,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, com.goo
         Log.i(TAG, getString(R.string.location_success));
         LocationServices.FusedLocationApi
                 .requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-//        if (location == null) {
-//            Log.e(TAG, getString(R.string.location_failure));
-//        } else {
-//            handleNewLocation(location);
-//        }
     }
 
     @Override
@@ -213,6 +211,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, com.goo
         LatLng latLng = new LatLng(currentLatitude, currentLongitude);
         MarkerOptions options = new MarkerOptions()
                 .position(latLng)
+                .draggable(false)
                 .alpha((float) 0.8);
         mMap.addMarker(options);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));

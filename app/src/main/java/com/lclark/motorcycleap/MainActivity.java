@@ -36,13 +36,16 @@ TextView speedometer;
 
     public void setUpViewPager(){
         ViewPager viewPager = (ViewPager) findViewById(R.id.activity_main_viewpager);
+        viewPager.setCurrentItem(1);
         FragmentPagerAdapter adapter = new TabAdapter(getSupportFragmentManager(), this);
         viewPager.setAdapter(adapter);
+
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.activity_main_tablayout);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         Toolbar toolbar = (Toolbar) findViewById(R.id.activity_main_toolbar);
+        toolbar.setTextAlignment(Toolbar.TEXT_ALIGNMENT_CENTER);
         setSupportActionBar(toolbar);
     }
 

@@ -11,4 +11,9 @@
     <string name="location_disconnect">Location services suspended. Please reconnect</string>
     <string name="location_failure">Location services connection failed with code %s</string>
     <string name="currentSpeed_hint">Current Speed</string>
+    <string name="backPSI_hint">Back Psi</string>
+    <string name="frontPSI_hint">Front Psi</string>
+    <string name="savebutton">SAVE</string>
+    <string name="clear_button">CLEAR</string>
+    <string name="bike_hint">Bike_hint</string>
 </resources>
