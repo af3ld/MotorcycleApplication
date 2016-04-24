@@ -53,6 +53,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     public static final String ARG_INDEX = "Index";
     public static final String ARG_LOCATION = "Location";
 
+
+
     private Context mContext;
     private MapView mapFragment;
     private GoogleMap mMap;
@@ -61,6 +63,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     private Boolean isRideTracking = false;
     public ArrayList<LatLng> places;
     private int placesIndex = 0;
+    private int startIndex;
 
     public static MapFragment newInstance(@ColorInt int color, int index, LatLng latLng) {
         MapFragment fragment = new MapFragment();
@@ -112,6 +115,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                 } else {
                     Snackbar.make(view, "Ride over", Snackbar.LENGTH_SHORT).show();
                     isRideTracking = false;
+
                 }
             }
         });
@@ -126,6 +130,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
     public void polylinesUpdate() {
         if (places.size() >= 2) {
+            startIndex = placesIndex;
             Polyline line = mMap.addPolyline(new PolylineOptions()
                     .add(places.get(placesIndex), places.get(placesIndex + 1))
                     .width(2)
