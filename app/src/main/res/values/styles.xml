@@ -17,7 +17,7 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="settings_frag_basic_editText">
-        <item name="android:textColor">@color/ink</item>
+        <item name="android:textColor">@color/soft_steel</item>
         <item name="android:textColorHint">@color/ink</item>
         <item name="android:hint">@string/bike_hint</item>
     </style>

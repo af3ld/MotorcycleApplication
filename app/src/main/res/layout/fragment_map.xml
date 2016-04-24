@@ -5,7 +5,7 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
-        android:background="@color/sand"
+        android:background="@color/soft_steel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"

@@ -10,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:background="@color/medium_umber"
-        app:titleTextColor="@color/ink"
+        android:background="@color/midnight_lavendar"
+        app:titleTextColor="@color/mint"
         />
 
     <android.support.design.widget.TabLayout
@@ -19,9 +19,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabIndicatorColor="@color/soft_tan"
-        app:tabBackground="@color/medium_umber"
-        app:tabSelectedTextColor="@color/pumpkin"
-        app:tabTextColor="@color/ink"
+        app:tabBackground="@color/midnight_lavendar"
+        app:tabSelectedTextColor="@color/muted_fuchsia"
+        app:tabTextColor="@color/mint"
         app:tabMaxWidth="0dp"
         app:tabGravity="fill"
 

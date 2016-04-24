@@ -62,7 +62,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     public ArrayList<LatLng> places;
     private int placesIndex = 0;
 
-
     public static MapFragment newInstance(@ColorInt int color, int index, LatLng latLng) {
         MapFragment fragment = new MapFragment();
         Bundle args = new Bundle();
@@ -209,7 +208,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                 .alpha((float) 0.8);
         mMap.addMarker(options);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
-        places.add(latLng);
-        polylinesUpdate();
+        if (isRideTracking) {
+            places.add(latLng);
+            polylinesUpdate();
+        }
     }
 }

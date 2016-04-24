@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
     public void setUpViewPager(){
         ViewPager viewPager = (ViewPager) findViewById(R.id.activity_main_viewpager);
         viewPager.setCurrentItem(1);

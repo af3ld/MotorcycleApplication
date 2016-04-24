@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/sand"
+    android:background="@color/goldenrod"
     android:orientation="vertical">
 
     <EditText
@@ -63,7 +63,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/medium_umber"
+            android:background="@color/ink"
+            android:textColor="@color/goldenrod"
             android:text="@string/savebutton"/>
 
         <Button
@@ -71,7 +72,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/medium_umber"
+            android:background="@color/ink"
+            android:textColor="@color/goldenrod"
             android:text="@string/clear_button"/>
     </LinearLayout>
 </RelativeLayout>
