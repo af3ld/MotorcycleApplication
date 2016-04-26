@@ -49,9 +49,9 @@ public class RiderStatisticsAdapter extends BaseAdapter {
         ViewHolder viewHolder;
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.fragment_recyclerview_rider_stats, parent, false);
-            TextView titleTextView = (TextView) convertView.findViewById(R.id.row_title);
+           // TextView titleTextView = (TextView) convertView.findViewById(R.id.s);
             viewHolder = new ViewHolder();
-            viewHolder.title = titleTextView;
+            //viewHolder.title = titleTextView;
 
             convertView.setTag(viewHolder);
         } else {

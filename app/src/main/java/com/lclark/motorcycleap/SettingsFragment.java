@@ -1,6 +1,7 @@
 package com.lclark.motorcycleap;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
@@ -20,7 +21,7 @@ import com.google.android.gms.maps.MapView;
  * Created by student22 on 4/14/16.
  */
 public class SettingsFragment extends Fragment implements View.OnClickListener {
-
+SharedPreferences sharedPreferences;
     EditText make;
     EditText model;
     EditText tires;
@@ -50,6 +51,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         Bundle args = getArguments();
         int index = args.getInt(ARG_INDEX);
         Log.d(TAG, "Fragment at " + index);
+        sharedPreferences = getActivity().getSharedPreferences("BikeSettings", Context.MODE_PRIVATE  );
         return rootView;
 
     }
@@ -58,6 +60,12 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         if (v.getId() == R.id.fragment_settings_save_button) {
             makeCheck(make.getText().toString());
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(R.string.make + "", make.getText().toString());
+            editor.putString(R.string.model + "", model.getText().toString());
+            editor.putString(R.string.tires + "",tires.getText().toString() );
+            editor.putString(R.string.backPSI_hint +"", backPsi.getText().toString());
+            editor.putString(R.string.frontPSI_hint +"", frontPsi.getText().toString());
         }
 
     }
