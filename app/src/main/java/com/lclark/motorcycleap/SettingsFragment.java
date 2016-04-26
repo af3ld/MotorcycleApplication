@@ -22,6 +22,12 @@ import com.google.android.gms.maps.MapView;
  */
 public class SettingsFragment extends Fragment implements View.OnClickListener {
 SharedPreferences sharedPreferences;
+
+    public String getSettings() {
+        return settings;
+    }
+
+    String settings = "settings";
     EditText make;
     EditText model;
     EditText tires;
@@ -51,7 +57,7 @@ SharedPreferences sharedPreferences;
         Bundle args = getArguments();
         int index = args.getInt(ARG_INDEX);
         Log.d(TAG, "Fragment at " + index);
-        sharedPreferences = getActivity().getSharedPreferences("BikeSettings", Context.MODE_PRIVATE  );
+        sharedPreferences = getActivity().getSharedPreferences( settings , Context.MODE_PRIVATE  );
         return rootView;
 
     }
@@ -59,13 +65,12 @@ SharedPreferences sharedPreferences;
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.fragment_settings_save_button) {
+
+
+
             makeCheck(make.getText().toString());
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString(R.string.make + "", make.getText().toString());
-            editor.putString(R.string.model + "", model.getText().toString());
-            editor.putString(R.string.tires + "",tires.getText().toString() );
-            editor.putString(R.string.backPSI_hint +"", backPsi.getText().toString());
-            editor.putString(R.string.frontPSI_hint +"", frontPsi.getText().toString());
+
+
         }
 
     }

@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -60,8 +61,13 @@ public class RiderStatisticsFragment extends Fragment implements SensorEventList
 
         SensorManager sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
         Sensor gravitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
-        sensorManager.registerListener(this, gravitySensor, sensorManager.SENSOR_DELAY_FASTEST);
+        sensorManager.registerListener(this, gravitySensor, SensorManager.SENSOR_DELAY_FASTEST);
         speedometer = (TextView) getActivity().findViewById(R.id.fragment_rider_stats_currentspeed_textView);
+
+
+
+
+
         super.onActivityCreated(savedInstanceState);
     }
 
