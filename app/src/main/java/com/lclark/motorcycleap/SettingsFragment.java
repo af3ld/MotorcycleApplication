@@ -21,13 +21,8 @@ import com.google.android.gms.maps.MapView;
  * Created by student22 on 4/14/16.
  */
 public class SettingsFragment extends Fragment implements View.OnClickListener {
-SharedPreferences sharedPreferences;
 
-    public String getSettings() {
-        return settings;
-    }
-
-    String settings = "settings";
+    EditText name;
     EditText make;
     EditText model;
     EditText tires;
@@ -38,7 +33,6 @@ SharedPreferences sharedPreferences;
     public static final String TAG = SettingsFragment.class.getSimpleName();
     public static final String ARG_COLOR = "Color";
     public static final String ARG_INDEX = "Index";
-
     public static SettingsFragment newInstance(@ColorInt int color, int index) {
 
         SettingsFragment fragment = new SettingsFragment();
@@ -57,7 +51,7 @@ SharedPreferences sharedPreferences;
         Bundle args = getArguments();
         int index = args.getInt(ARG_INDEX);
         Log.d(TAG, "Fragment at " + index);
-        sharedPreferences = getActivity().getSharedPreferences( settings , Context.MODE_PRIVATE  );
+
         return rootView;
 
     }
@@ -65,13 +59,24 @@ SharedPreferences sharedPreferences;
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.fragment_settings_save_button) {
-
-
-
             makeCheck(make.getText().toString());
-
+Ride ride = new Ride(getContext(), name.getText().toString().toLowerCase());
+            ride.setMake(make.getText().toString());
+            ride.setModel(model.getText().toString());
+            ride.setTires(tires.getText().toString());
+            ride.setBackPsi(Long.valueOf(backPsi.getText().toString()));
+            ride.setFrontPsi(Long.valueOf(frontPsi.getText().toString()));
+            ride.save(getContext());
 
         }
+
+        if (v.getId() == R.id.fragment_settings_clear_button);
+        make.setText("");
+        model.setText("");
+        tires.setText("");
+        frontPsi.setText("");
+        backPsi.setText("");
+
 
     }
 
@@ -105,7 +110,7 @@ SharedPreferences sharedPreferences;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-
+        name = (EditText) getActivity().findViewById(R.id.fragment_settings_name);
         make = (EditText) getActivity().findViewById(R.id.fragment_settings_make_edittext);
         model = (EditText) getActivity().findViewById(R.id.fragment_settings_model_edittext);
         tires = (EditText) getActivity().findViewById(R.id.fragment_settings_tires_edittext);
