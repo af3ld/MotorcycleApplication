@@ -110,10 +110,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             @Override
             public void onClick(View view) {
                 if (!isRideTracking) {
-                    Snackbar.make(view, "Ride begun", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(view, "Rides begun", Snackbar.LENGTH_SHORT).show();
                     isRideTracking = true;
                 } else {
-                    Snackbar.make(view, "Ride over", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(view, "Rides over", Snackbar.LENGTH_SHORT).show();
                     isRideTracking = false;
 
                 }

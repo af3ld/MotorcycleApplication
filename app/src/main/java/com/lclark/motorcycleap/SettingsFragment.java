@@ -1,21 +1,16 @@
 package com.lclark.motorcycleap;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-
-import com.google.android.gms.maps.MapView;
 
 /**
  * Created by student22 on 4/14/16.
@@ -60,13 +55,13 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         if (v.getId() == R.id.fragment_settings_save_button) {
             makeCheck(make.getText().toString());
-Ride ride = new Ride(getContext(), name.getText().toString().toLowerCase());
-            ride.setMake(make.getText().toString());
-            ride.setModel(model.getText().toString());
-            ride.setTires(tires.getText().toString());
-            ride.setBackPsi(Long.valueOf(backPsi.getText().toString()));
-            ride.setFrontPsi(Long.valueOf(frontPsi.getText().toString()));
-            ride.save(getContext());
+Rides rideSaver = new Rides(getContext(), name.getText().toString().toLowerCase());
+            rideSaver.setMake(make.getText().toString());
+            rideSaver.setModel(model.getText().toString());
+            rideSaver.setTires(tires.getText().toString());
+            rideSaver.setBackPsi(Long.valueOf(backPsi.getText().toString()));
+            rideSaver.setFrontPsi(Long.valueOf(frontPsi.getText().toString()));
+            rideSaver.save(getContext());
 
         }
 
