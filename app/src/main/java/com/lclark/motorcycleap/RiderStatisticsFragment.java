@@ -67,7 +67,7 @@ public class RiderStatisticsFragment extends Fragment implements SensorEventList
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        
+
         speedometer.setText(String.format("%f", (event.values[0] * 60 * 60)/ 1000  ) + " km/h");
     }
 

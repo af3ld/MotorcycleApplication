@@ -16,4 +16,7 @@
     <string name="savebutton">SAVE</string>
     <string name="clear_button">CLEAR</string>
     <string name="bike_hint">Bike_hint</string>
+    <string name="make">Make</string>
+    <string name="model">Model</string>
+    <string name="tires">Tires</string>
 </resources>
