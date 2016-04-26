@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:inputType="textCapSentences"
         android:paddingTop="75dp"
+        android:hint="@string/make"
         style="@style/settings_frag_basic_editText" />
 
     <EditText
@@ -18,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/fragment_settings_make_edittext"
+        android:hint="@string/model"
         style="@style/settings_frag_basic_editText" />
 
     <EditText
@@ -29,6 +31,7 @@
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
         android:paddingTop="100dp"
+        android:hint="@string/tires"
         style="@style/settings_frag_basic_editText" />
 
     <EditText
