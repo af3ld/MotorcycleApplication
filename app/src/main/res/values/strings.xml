@@ -20,4 +20,6 @@
     <string name="model">Model</string>
     <string name="tires">Tires</string>
     <string name="UserName">UserName</string>
+    <string name="saved">SAVED</string>
+    <string name="cleared">Cleared</string>
 </resources>

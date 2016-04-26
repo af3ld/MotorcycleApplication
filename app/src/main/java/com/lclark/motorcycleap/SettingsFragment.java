@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * Created by student22 on 4/14/16.
@@ -62,7 +63,7 @@ Rides rideSaver = new Rides(getContext(), name.getText().toString().toLowerCase(
             rideSaver.setBackPsi(Long.valueOf(backPsi.getText().toString()));
             rideSaver.setFrontPsi(Long.valueOf(frontPsi.getText().toString()));
             rideSaver.save(getContext());
-
+            Toast.makeText(getContext() , getString(R.string.saved),Toast.LENGTH_SHORT ).show();
         }
 
         if (v.getId() == R.id.fragment_settings_clear_button) {
@@ -71,6 +72,7 @@ Rides rideSaver = new Rides(getContext(), name.getText().toString().toLowerCase(
             tires.setText("");
             frontPsi.setText("");
             backPsi.setText("");
+            Toast.makeText(getContext() , R.string.cleared ,Toast.LENGTH_SHORT ).show();
 
         }
     }

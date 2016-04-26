@@ -13,7 +13,7 @@ public class Rides {
     double max_speed;
     double average_speed;
 
-    long rideLength;
+
 
 
 
