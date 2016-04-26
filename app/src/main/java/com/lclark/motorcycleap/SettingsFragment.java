@@ -70,14 +70,14 @@ Ride ride = new Ride(getContext(), name.getText().toString().toLowerCase());
 
         }
 
-        if (v.getId() == R.id.fragment_settings_clear_button);
-        make.setText("");
-        model.setText("");
-        tires.setText("");
-        frontPsi.setText("");
-        backPsi.setText("");
+        if (v.getId() == R.id.fragment_settings_clear_button) {
+            make.setText("");
+            model.setText("");
+            tires.setText("");
+            frontPsi.setText("");
+            backPsi.setText("");
 
-
+        }
     }
 
     void makeCheck(String makeString) {

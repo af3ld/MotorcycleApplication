@@ -42,6 +42,7 @@
         style="@style/settings_frag_basic_editText" />
 
     <EditText
+        android:inputType="number"
         android:id="@+id/fragment_settings_psi_front_edittext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -53,6 +54,7 @@
         style="@style/settings_frag_basic_editText" />
 
     <EditText
+        android:inputType="number"
         android:id="@+id/fragment_settings_psi_back_edittext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
