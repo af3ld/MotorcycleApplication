@@ -7,19 +7,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.util.List;
 
 
-/**
- * Created by alexfeldman on 4/21/16.
- */
 public class RiderStatisticsAdapter extends BaseAdapter {
 
     private Context mContext;
-
-    public static class ViewHolder {
-        TextView title;
-    }
-
+    private List<Rides> ridesList;
 
     public RiderStatisticsAdapter(Context context) {
         mContext = context;
@@ -28,35 +22,27 @@ public class RiderStatisticsAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 1;
+        return ridesList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return 0;
+        return ridesList.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return ridesList.get(position).getLong_id();
     }
 
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = LayoutInflater.from(mContext);
+        View v = View.inflate(mContext, R.layout.fragment_rider_stats_cardview, null);
+        TextView frontPsi = (TextView) v.findViewById(R.id.rider_stats_card_view_Front_PSI);
 
-        ViewHolder viewHolder;
-        if (convertView == null) {
-            convertView = inflater.inflate(R.layout.fragment_rider_stats_cardview, parent, false);
-           // TextView titleTextView = (TextView) convertView.findViewById(R.id.s);
-            viewHolder = new ViewHolder();
-            //viewHolder.title = titleTextView;
-
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (ViewHolder) convertView.getTag();
-        }
-        return convertView;
+        frontPsi.setText(ridesList.get(position).getBackPsi() + "");
+        return v;
     }
+
 }

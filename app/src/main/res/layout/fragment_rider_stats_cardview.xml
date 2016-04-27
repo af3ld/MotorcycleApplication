@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView
+    android:id="@+id/Rider_stats_card_view"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -12,25 +13,25 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/Rider_stats_card_view_Ride_Number"
+            android:id="@+id/rider_stats_card_view_Ride_Number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/Rider_stats_card_view_Front_PSI"
+            android:id="@+id/rider_stats_card_view_Front_PSI"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />
         <TextView
-            android:id="@+id/Rider_stats_card_view_Max_speed"
+            android:id="@+id/rider_stats_card_view_Max_speed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/Rider_stats_card_view_Front_Average_Speed"
+            android:id="@+id/rider_stats_card_view_Front_Average_Speed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/Rider_stats_card_view_Back_PSI"
+            android:id="@+id/rider_stats_card_view_Back_PSI"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

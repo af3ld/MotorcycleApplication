@@ -10,6 +10,15 @@ public class Rides {
 
     static String id;
 
+    public long getLong_id() {
+        return long_id;
+    }
+
+    public void setLong_id(long long_id) {
+        this.long_id = long_id;
+    }
+
+    long long_id;
     double max_speed;
     double average_speed;
 
@@ -25,19 +34,19 @@ public class Rides {
     static String make;
     static String model;
 
+public void Load(Context context, String id_in){
+    id = id_in;
+    SharedPreferences sharedPreferences = context.getSharedPreferences(id, Context.MODE_PRIVATE);
+    make = sharedPreferences.getString(R.string.make + "", "" );
+    model = sharedPreferences.getString(R.string.model + "", "");
+    tires = sharedPreferences.getString(R.string.tires + "", "");
+    frontPsi = sharedPreferences.getLong(R.string.frontPSI_hint + "", 0);
+    backPsi =  sharedPreferences.getLong(R.string.backPSI_hint + "", 0);
+    return;
+}
 
-
-    public Rides(Context context, String id_in){
-        id = id_in;
-        SharedPreferences sharedPreferences = context.getSharedPreferences(id, Context.MODE_PRIVATE);
-        make = sharedPreferences.getString(R.string.make + "", "" );
-        model = sharedPreferences.getString(R.string.model + "", "");
-        tires = sharedPreferences.getString(R.string.tires + "", "");
-        frontPsi = sharedPreferences.getLong(R.string.frontPSI_hint + "", 0);
-        backPsi =  sharedPreferences.getLong(R.string.backPSI_hint + "", 0);
-
-
-    }
+    public Rides(){
+     }
 
    public void save(Context context ){
     SharedPreferences sharedPreferences = context.getSharedPreferences(id, Context.MODE_PRIVATE);
