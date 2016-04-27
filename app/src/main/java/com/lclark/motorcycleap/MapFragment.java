@@ -62,6 +62,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
     public Boolean isRideTracking = false;
     private Boolean isFirstMarker = true;
+    private Boolean isLastMarker = false;
 
     public ArrayList<LatLng> places;
     private int placesIndex = 0;
@@ -114,6 +115,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                 if (!isRideTracking) {
                     Snackbar.make(view, "Rides begun", Snackbar.LENGTH_SHORT).show();
                     isRideTracking = true;
+                    isFirstMarker = true;
+                    places = new ArrayList<LatLng>();
                 } else {
                     Snackbar.make(view, "Rides over", Snackbar.LENGTH_SHORT).show();
                     isRideTracking = false;
@@ -135,8 +138,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             startIndex = placesIndex;
             Polyline line = mMap.addPolyline(new PolylineOptions()
                     .add(places.get(placesIndex), places.get(placesIndex + 1))
-                    .width(2)
-                    .color(ContextCompat.getColor(mContext, R.color.pumpkin)));
+                    .width(7)
+                    .color(ContextCompat.getColor(getContext(), R.color.pumpkin)));
             placesIndex++;
         }
     }
@@ -173,7 +176,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
     @Override
     public void onLocationChanged(Location location) {
-
         handleNewLocation(location);
         Log.d(TAG, "Location: " + location.getLatitude() + ", " + location.getLongitude());
     }
@@ -217,10 +219,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             isFirstMarker = false;
             mMap.addMarker(options);
         }
-
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
         if (isRideTracking) {
             places.add(latLng);
+            Log.d(TAG, Integer.toString(places.size()));
             polylinesUpdate();
         }
     }
