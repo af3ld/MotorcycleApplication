@@ -18,9 +18,6 @@ public class Rides {
     double average_speed;
 
 
-
-
-
     static String tires;
 
     static long frontPsi;

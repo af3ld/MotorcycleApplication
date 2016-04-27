@@ -23,7 +23,7 @@ public class RiderStatisticsAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return ridesList.size();
+        return (ridesList != null) ? ridesList.size() : 0;
     }
 
     @Override

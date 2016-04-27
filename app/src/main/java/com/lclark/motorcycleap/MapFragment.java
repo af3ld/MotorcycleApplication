@@ -54,13 +54,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     public static final String ARG_LOCATION = "Location";
 
 
-
     private Context mContext;
     private MapView mapFragment;
     private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
-    private Boolean isRideTracking = false;
+
+    public Boolean isRideTracking = false;
+    private Boolean isFirstMarker = true;
+
     public ArrayList<LatLng> places;
     private int placesIndex = 0;
     private int startIndex;
@@ -75,7 +77,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         return fragment;
     }
 
-    @Nullable
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_map, container, false);
@@ -93,7 +95,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
-         mLocationRequest = LocationRequest.create()
+        mLocationRequest = LocationRequest.create()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
                 .setInterval(10 * milliseconds)
                 .setFastestInterval(milliseconds);
@@ -171,10 +173,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
     @Override
     public void onLocationChanged(Location location) {
+
         handleNewLocation(location);
         Log.d(TAG, "Location: " + location.getLatitude() + ", " + location.getLongitude());
     }
-
 
 
     @Override
@@ -207,12 +209,16 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         double currentLatitude = location.getLatitude();
         double currentLongitude = location.getLongitude();
         LatLng latLng = new LatLng(currentLatitude, currentLongitude);
-        MarkerOptions options = new MarkerOptions()
-                .position(latLng)
-                .draggable(false)
-                .alpha((float) 0.8);
-        mMap.addMarker(options);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
+        if (isFirstMarker) {
+            MarkerOptions options = new MarkerOptions()
+                    .position(latLng)
+                    .draggable(false)
+                    .visible(true);
+            isFirstMarker = false;
+            mMap.addMarker(options);
+        }
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13));
         if (isRideTracking) {
             places.add(latLng);
             polylinesUpdate();
