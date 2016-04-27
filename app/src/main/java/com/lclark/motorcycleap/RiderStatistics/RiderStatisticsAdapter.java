@@ -1,11 +1,12 @@
-package com.lclark.motorcycleap;
+package com.lclark.motorcycleap.RiderStatistics;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.lclark.motorcycleap.R;
 
 import java.util.List;
 

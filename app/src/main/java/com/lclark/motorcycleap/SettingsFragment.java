@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.lclark.motorcycleap.RiderStatistics.Rides;
+
 /**
  * Created by student22 on 4/14/16.
  */
@@ -56,7 +58,11 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         if (v.getId() == R.id.fragment_settings_save_button) {
             makeCheck(make.getText().toString());
-Rides rideSaver = new Rides(getContext(), name.getText().toString().toLowerCase());
+
+            Rides rideSaver = new Rides();
+            rideSaver.load( getContext() ,name.getText().toString().toLowerCase());
+
+
             rideSaver.setMake(make.getText().toString());
             rideSaver.setModel(model.getText().toString());
             rideSaver.setTires(tires.getText().toString());

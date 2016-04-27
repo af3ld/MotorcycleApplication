@@ -1,4 +1,4 @@
-package com.lclark.motorcycleap;
+package com.lclark.motorcycleap.RiderStatistics;
 
 import android.content.Context;
 import android.hardware.Sensor;
@@ -6,18 +6,15 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.lclark.motorcycleap.R;
 
 /**
  * Created by student22 on 4/14/16.

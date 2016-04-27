@@ -12,13 +12,6 @@ public class Rides {
 
     static String id;
 
-    public long getLong_id() {
-        return long_id;
-    }
-
-    public void setLong_id(long long_id) {
-        this.long_id = long_id;
-    }
 
     long long_id;
     double max_speed;
@@ -64,6 +57,13 @@ public void load(Context context, String id_in){
     }
 
 
+    public long getLong_id() {
+        return long_id;
+    }
+
+    public void setLong_id(long long_id) {
+        this.long_id = long_id;
+    }
 
     public static String getModel() {
         return model;

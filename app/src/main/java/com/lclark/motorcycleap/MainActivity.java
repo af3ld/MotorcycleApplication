@@ -2,6 +2,7 @@ package com.lclark.motorcycleap;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -29,6 +30,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setUpViewPager();
+
+       SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        sharedPreferences.getString("CurrentUser", "Blank");
+        sharedPreferences.getInt("RideCount", 0);
 
 
     }

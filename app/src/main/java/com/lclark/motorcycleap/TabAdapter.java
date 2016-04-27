@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.lclark.motorcycleap.RiderStatistics.RiderStatisticsFragment;
 
 /**
  * Created by alexfeldman on 4/13/16.
