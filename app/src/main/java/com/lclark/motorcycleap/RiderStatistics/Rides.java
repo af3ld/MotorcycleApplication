@@ -1,7 +1,9 @@
-package com.lclark.motorcycleap;
+package com.lclark.motorcycleap.RiderStatistics;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+
+import com.lclark.motorcycleap.R;
 
 /**
  * Created by 2yan on 26-Apr-16.
@@ -34,7 +36,7 @@ public class Rides {
     static String make;
     static String model;
 
-public void Load(Context context, String id_in){
+public void load(Context context, String id_in){
     id = id_in;
     SharedPreferences sharedPreferences = context.getSharedPreferences(id, Context.MODE_PRIVATE);
     make = sharedPreferences.getString(R.string.make + "", "" );
@@ -46,7 +48,7 @@ public void Load(Context context, String id_in){
 }
 
     public Rides(){
-     }
+    }
 
    public void save(Context context ){
     SharedPreferences sharedPreferences = context.getSharedPreferences(id, Context.MODE_PRIVATE);
