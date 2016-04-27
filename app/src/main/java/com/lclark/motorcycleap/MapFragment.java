@@ -139,6 +139,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             Polyline line = mMap.addPolyline(new PolylineOptions()
                     .add(places.get(placesIndex), places.get(placesIndex + 1))
                     .width(7)
+                    .geodesic(true)
                     .color(ContextCompat.getColor(getContext(), R.color.pumpkin)));
             placesIndex++;
         }
