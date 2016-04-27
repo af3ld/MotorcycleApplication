@@ -4,9 +4,6 @@ package com.lclark.motorcycleap;
 import android.content.Context;
 import android.content.IntentSender;
 import android.location.Location;
-import android.location.LocationListener;
-
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
@@ -22,21 +19,19 @@ import android.view.ViewGroup;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.FusedLocationProviderApi;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -61,7 +56,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     private LocationRequest mLocationRequest;
 
     public Boolean isRideTracking = false;
-    private Boolean isFirstMarker = true;
+    private Boolean isFirstMarker = false;
     private Boolean isLastMarker = false;
 
     public ArrayList<LatLng> places;
@@ -116,11 +111,23 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                     Snackbar.make(view, "Rides begun", Snackbar.LENGTH_SHORT).show();
                     isRideTracking = true;
                     isFirstMarker = true;
-                    places = new ArrayList<LatLng>();
+                    places = new ArrayList<>();
                 } else {
                     Snackbar.make(view, "Rides over", Snackbar.LENGTH_SHORT).show();
                     isRideTracking = false;
-
+                    if (places != null && !places.isEmpty() && placesIndex >= 1) {
+                        MarkerOptions options = new MarkerOptions()
+                                .position(places.get(placesIndex))
+                                .draggable(false)
+                                .visible(true);
+                        mMap.addMarker(options);
+                    }
+                    LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                    for (LatLng loc : places) {
+                        builder.include(new MarkerOptions().position(loc).getPosition());
+                    }
+                    int padding = 70;
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), padding));
                 }
             }
         });
@@ -136,11 +143,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     public void polylinesUpdate() {
         if (places.size() >= 2) {
             startIndex = placesIndex;
-            Polyline line = mMap.addPolyline(new PolylineOptions()
+            mMap.addPolyline(new PolylineOptions()
                     .add(places.get(placesIndex), places.get(placesIndex + 1))
                     .width(7)
                     .geodesic(true)
-                    .color(ContextCompat.getColor(getContext(), R.color.pumpkin)));
+                    .color(ContextCompat.getColor(getContext(), R.color.muted_fuchsia)));
             placesIndex++;
         }
     }
