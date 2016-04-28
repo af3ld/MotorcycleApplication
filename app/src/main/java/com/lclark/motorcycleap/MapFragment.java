@@ -1,7 +1,9 @@
 package com.lclark.motorcycleap;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.IntentSender;
 import android.location.Location;
 import android.os.Bundle;
@@ -12,9 +14,12 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 
 
 import com.google.android.gms.common.ConnectionResult;
@@ -128,9 +133,36 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                     }
                     int padding = 70;
                     mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), padding));
+                    mapAlert();
                 }
             }
         });
+    }
+
+    private void mapAlert(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
+                .setTitle("Delete entry")
+                .setMessage("Are you sure you want to delete this entry?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // continue with delete
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert);
+
+        AlertDialog alertDialog = builder.create();
+        Window window = alertDialog.getWindow();
+        WindowManager.LayoutParams wlp = window.getAttributes();
+
+        wlp.gravity = Gravity.BOTTOM;
+        wlp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+        window.setAttributes(wlp);
+        alertDialog.show();
     }
 
     @Override
