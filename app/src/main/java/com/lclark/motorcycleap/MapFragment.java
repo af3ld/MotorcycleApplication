@@ -141,8 +141,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
     private void mapAlert(){
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
-                .setTitle("Delete entry")
-                .setMessage("Are you sure you want to delete this entry?")
+                .setTitle(R.string.saveRide)
+                .setMessage(R.string.saveRideMessage)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // continue with delete
@@ -150,10 +150,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                 })
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        // do nothing
+                        mMap.clear();
+                        Log.d(TAG, mContext.getString(R.string.onMapCleared));
                     }
                 })
-                .setIcon(android.R.drawable.ic_dialog_alert);
+                .setIcon(ContextCompat.getDrawable(getActivity(), R.drawable.motorcycle));
 
         AlertDialog alertDialog = builder.create();
         Window window = alertDialog.getWindow();

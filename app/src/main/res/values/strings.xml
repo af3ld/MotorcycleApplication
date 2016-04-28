@@ -22,4 +22,7 @@
     <string name="UserName">UserName</string>
     <string name="saved">SAVED</string>
     <string name="cleared">Cleared</string>
+    <string name="onMapCleared">Map Cleared</string>
+    <string name="saveRide">Save Ride?</string>
+    <string name="saveRideMessage">Would you like to save this ride?</string>
 </resources>
