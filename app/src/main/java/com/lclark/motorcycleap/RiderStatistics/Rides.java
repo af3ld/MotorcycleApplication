@@ -3,17 +3,26 @@ package com.lclark.motorcycleap.RiderStatistics;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.lclark.motorcycleap.R;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by 2yan on 26-Apr-16.
  */
 public class Rides {
 
-    static String id;
+static String fileName;
 
 
-    long long_id;
     double max_speed;
     double average_speed;
 
@@ -26,31 +35,45 @@ public class Rides {
     static String make;
     static String model;
 
-public void load(Context context, String id_in){
-    id = id_in;
-    SharedPreferences sharedPreferences = context.getSharedPreferences(id, Context.MODE_PRIVATE);
-    make = sharedPreferences.getString(R.string.make + "", "" );
-    model = sharedPreferences.getString(R.string.model + "", "");
-    tires = sharedPreferences.getString(R.string.tires + "", "");
-    frontPsi = sharedPreferences.getLong(R.string.frontPSI_hint + "", 0);
-    backPsi =  sharedPreferences.getLong(R.string.backPSI_hint + "", 0);
-    return;
-}
-
-    public Rides(){
+    public ArrayList<LatLng> getCordinates() {
+        return cordinates;
     }
 
-   public void save(Context context ){
-    SharedPreferences sharedPreferences = context.getSharedPreferences(id, Context.MODE_PRIVATE);
-       SharedPreferences.Editor editor = sharedPreferences.edit();
+    ArrayList<LatLng> cordinates;
 
-       editor.putString(R.string.make + "", make);
-       editor.putString(R.string.model + "", model);
-       editor.putString(R.string.tires + "", tires);
-       editor.putLong(R.string.backPSI_hint + "", backPsi);
-       editor.putLong(R.string.frontPSI_hint + "", frontPsi);
+    public void setCordinates(ArrayList<LatLng> cordinates) {
+        this.cordinates = new ArrayList<LatLng>(cordinates);
+    }
 
 
+    public Rides load(Context context, String ID) throws IOException, ClassNotFoundException {
+    FileInputStream fis = context.openFileInput(ID +"");
+    ObjectInputStream is = new ObjectInputStream(fis);
+    Rides returnme = (Rides) is.readObject();
+    is.close();
+    fis.close();
+    return returnme;
+    }
+
+    public Rides(Context context){
+
+        SharedPreferences sharedPref = context.getSharedPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        int temp = sharedPref.getInt("ride_id", -1);
+        temp = temp++;
+        editor.putInt("ride_id", temp );
+        editor.commit();
+        fileName = temp + "";
+    }
+
+   public void save(Context context ) throws IOException {
+
+       FileOutputStream fos = context.openFileOutput(fileName, MODE_PRIVATE);
+       ObjectOutputStream os = new ObjectOutputStream(fos);
+       os.writeObject(this);
+       os.close();
+       fos.close();
     }
 
 
