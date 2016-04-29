@@ -23,7 +23,6 @@
     </style>
 
     <style name="RideAlert" parent="Theme.AppCompat.Light.Dialog">
-        <item name="android:background">@color/translucent_goldenrod</item>
         <item name="android:backgroundDimEnabled">false</item>
         <item name="android:colorAccent">@color/ink</item>
         <item name="android:textColor">@color/ink</item>

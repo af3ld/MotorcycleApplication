@@ -25,4 +25,6 @@
     <string name="onMapCleared">Map Cleared</string>
     <string name="saveRide">Save Ride?</string>
     <string name="saveRideMessage">Would you like to save this ride?</string>
+    <string name="rideStart">Ride Start</string>
+    <string name="rideEnd">Ride End</string>
 </resources>
