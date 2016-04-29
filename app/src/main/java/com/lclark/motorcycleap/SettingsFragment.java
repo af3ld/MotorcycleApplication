@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.lclark.motorcycleap.RiderStatistics.Rides;
 
+import java.io.IOException;
+
 /**
  * Created by student22 on 4/14/16.
  */
@@ -59,17 +61,20 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         if (v.getId() == R.id.fragment_settings_save_button) {
             makeCheck(make.getText().toString());
 
-//            Rides rideSaver = new Rides();
-//            rideSaver.load( getContext() ,name.getText().toString().toLowerCase());
-//
-//
-//            rideSaver.setMake(make.getText().toString());
-//            rideSaver.setModel(model.getText().toString());
-//            rideSaver.setTires(tires.getText().toString());
-//            rideSaver.setBackPsi(Long.valueOf(backPsi.getText().toString()));
-//            rideSaver.setFrontPsi(Long.valueOf(frontPsi.getText().toString()));
-//            rideSaver.save(getContext());
             Toast.makeText(getContext() , getString(R.string.saved),Toast.LENGTH_SHORT ).show();
+
+            Rides rideSaver = new Rides(getContext(), "name" );
+            rideSaver.setMake(make.getText().toString());
+            rideSaver.setModel(model.getText().toString());
+            rideSaver.setTires(model.getText().toString());
+            rideSaver.setBackPsi(Long.parseLong(frontPsi.getText().toString()));
+            rideSaver.setFrontPsi(Long.parseLong(backPsi.getText().toString()));
+            try {
+                rideSaver.save(getContext());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
 
         if (v.getId() == R.id.fragment_settings_clear_button) {

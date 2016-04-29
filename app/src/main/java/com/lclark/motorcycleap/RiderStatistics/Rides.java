@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.google.android.gms.maps.model.LatLng;
-import com.lclark.motorcycleap.R;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -57,7 +56,7 @@ static String fileName;
 
     public Rides(Context context){
 
-        SharedPreferences sharedPref = context.getSharedPreferences(MODE_PRIVATE);
+        SharedPreferences sharedPref = context.getSharedPreferences("Ride_id", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
         int temp = sharedPref.getInt("ride_id", -1);
@@ -65,6 +64,11 @@ static String fileName;
         editor.putInt("ride_id", temp );
         editor.commit();
         fileName = temp + "";
+    }
+
+    public Rides(Context context, String ID){
+        fileName = ID;
+
     }
 
    public void save(Context context ) throws IOException {

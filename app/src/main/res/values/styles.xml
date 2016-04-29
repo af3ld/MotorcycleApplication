@@ -14,6 +14,7 @@
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="settings_frag_basic_editText">
@@ -27,6 +28,15 @@
         <item name="android:colorAccent">@color/ink</item>
         <item name="android:textColor">@color/ink</item>
         <item name="android:textColorPrimary">@color/ink</item>
+    </style>
+
+    <style name="SettingsButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@color/ink</item>
+        <item name="android:textColor">@color/goldenrod</item>
+        <item name="android:layout_marginBottom">5dp</item>
     </style>
 
 </resources>
