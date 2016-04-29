@@ -35,6 +35,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.lclark.motorcycleap.RiderStatistics.Rides;
 
 import java.util.ArrayList;
 
@@ -124,7 +125,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                         MarkerOptions options = new MarkerOptions()
                                 .position(places.get(placesIndex))
                                 .draggable(false)
-                                .visible(true);
+                                .visible(true)
+                                .title(mContext.getString(R.string.rideEnd));
                         mMap.addMarker(options);
                     }
                     LatLngBounds.Builder builder = new LatLngBounds.Builder();
@@ -140,18 +142,23 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     }
 
     private void mapAlert(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.RideAlert)
                 .setTitle(R.string.saveRide)
                 .setMessage(R.string.saveRideMessage)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        // continue with delete
+
+//                        Rides ride = new Rides("");
+
+
+                        mMap.clear();
+                        Log.d(TAG, getActivity().getString(R.string.onMapCleared));
                     }
                 })
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         mMap.clear();
-                        Log.d(TAG, mContext.getString(R.string.onMapCleared));
+                        Log.d(TAG, getActivity().getString(R.string.onMapCleared));
                     }
                 })
                 .setIcon(ContextCompat.getDrawable(getActivity(), R.drawable.motorcycle));
@@ -159,9 +166,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         AlertDialog alertDialog = builder.create();
         Window window = alertDialog.getWindow();
         WindowManager.LayoutParams wlp = window.getAttributes();
-
         wlp.gravity = Gravity.BOTTOM;
-        wlp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
         window.setAttributes(wlp);
         alertDialog.show();
     }
@@ -256,7 +261,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             MarkerOptions options = new MarkerOptions()
                     .position(latLng)
                     .draggable(false)
-                    .visible(true);
+                    .visible(true)
+                    .title(mContext.getString(R.string.rideStart));
             isFirstMarker = false;
             mMap.addMarker(options);
         }
