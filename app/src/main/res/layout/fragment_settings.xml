@@ -5,12 +5,19 @@
     android:background="@color/goldenrod"
     android:orientation="vertical">
 
-    <EditText
-        android:layout_centerHorizontal="true"
+    <com.cengalabs.flatui.views.FlatEditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/fragment_settings_name"
         android:hint="@string/UserName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_centerHorizontal="true"
+        />
+    <!--<EditText-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:id="@+id/fragment_settings_name"-->
+        <!--android:hint="@string/UserName"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
 
     <EditText
         android:id="@+id/fragment_settings_make_edittext"
