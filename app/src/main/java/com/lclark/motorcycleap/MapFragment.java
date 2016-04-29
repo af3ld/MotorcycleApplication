@@ -37,6 +37,7 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.lclark.motorcycleap.RiderStatistics.Rides;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -63,7 +64,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
     public Boolean isRideTracking = false;
     private Boolean isFirstMarker = false;
-    private Boolean isLastMarker = false;
 
     public ArrayList<LatLng> places;
     private int placesIndex = 0;
@@ -106,7 +106,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     }
 
     /*
-    * Sets up the Floating action button with an onclick*/
+    * Sets up the Floating action button with an onclick
+    */
     public void setUpFAB(View rootView) {
         FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
         fab.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.sand));
@@ -141,16 +142,23 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         });
     }
 
+    /*
+    * Set up and display the Ride Alert
+    * Positive choice: Save the ride and clear map
+    * Negative choice: clear map and do not save the ride
+    */
     private void mapAlert(){
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.RideAlert)
                 .setTitle(R.string.saveRide)
                 .setMessage(R.string.saveRideMessage)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-
-//                        Rides ride = new Rides("");
-
-
+                        Rides ride = new Rides(getContext());
+                        try {
+                            ride.save(getContext());
+                        } catch (IOException e){
+                            Log.e(TAG, e.getLocalizedMessage());
+                        }
                         mMap.clear();
                         Log.d(TAG, getActivity().getString(R.string.onMapCleared));
                     }
