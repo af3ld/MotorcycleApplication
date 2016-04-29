@@ -56,7 +56,7 @@ static String fileName;
 
     public Rides(Context context){
 
-        SharedPreferences sharedPref = context.getSharedPreferences("Ride_id",Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = context.getSharedPreferences("Ride_id", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
         int temp = sharedPref.getInt("ride_id", -1);
@@ -64,6 +64,11 @@ static String fileName;
         editor.putInt("ride_id", temp );
         editor.commit();
         fileName = temp + "";
+    }
+
+    public Rides(Context context, String ID){
+        fileName = ID;
+
     }
 
    public void save(Context context ) throws IOException {
