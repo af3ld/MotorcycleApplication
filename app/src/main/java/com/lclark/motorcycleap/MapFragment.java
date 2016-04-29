@@ -140,7 +140,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     }
 
     private void mapAlert(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.RideAlert)
                 .setTitle(R.string.saveRide)
                 .setMessage(R.string.saveRideMessage)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -161,7 +161,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         WindowManager.LayoutParams wlp = window.getAttributes();
 
         wlp.gravity = Gravity.BOTTOM;
-        wlp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
         window.setAttributes(wlp);
         alertDialog.show();
     }
