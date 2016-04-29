@@ -55,17 +55,17 @@ static String fileName;
     return returnme;
     }
 
-//    public Rides(Context context){
-//
-//        SharedPreferences sharedPref = context.getSharedPreferences(MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedPref.edit();
-//
-//        int temp = sharedPref.getInt("ride_id", -1);
-//        temp = temp++;
-//        editor.putInt("ride_id", temp );
-//        editor.commit();
-//        fileName = temp + "";
-//    }
+    public Rides(Context context){
+
+        SharedPreferences sharedPref = context.getSharedPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        int temp = sharedPref.getInt("ride_id", -1);
+        temp = temp++;
+        editor.putInt("ride_id", temp );
+        editor.commit();
+        fileName = temp + "";
+    }
 
    public void save(Context context ) throws IOException {
 
