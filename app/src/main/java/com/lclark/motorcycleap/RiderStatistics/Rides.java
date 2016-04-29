@@ -77,13 +77,6 @@ static String fileName;
     }
 
 
-    public long getLong_id() {
-        return long_id;
-    }
-
-    public void setLong_id(long long_id) {
-        this.long_id = long_id;
-    }
 
     public static String getModel() {
         return model;
