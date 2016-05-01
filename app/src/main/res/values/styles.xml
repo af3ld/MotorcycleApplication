@@ -20,7 +20,7 @@
     <style name="settings_frag">
         <item name="android:hint">@string/bike_hint</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="fl_theme">@array/deep</item>
+        <item name="fl_theme">@array/blood</item>
         <item name="fl_cornerRadius">5dp</item>
         <item name="fl_textAppearance">fl_dark</item>
         <item name="android:textAlignment">center</item>
@@ -51,7 +51,6 @@
         <item name="fl_touchEffect">fl_ripple</item>
         <item name="fl_blockButtonEffectHeight">3dp</item>
         <item name="android:layout_marginBottom">5dp</item>
-        <item name="fl_theme">@array/sky</item>
         <item name="fl_textAppearance">fl_light</item>
     </style>
 

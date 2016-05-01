@@ -6,4 +6,5 @@
     <dimen name="settings_inner_margin">5dp</dimen>
     <dimen name="settings_outer_margin">10dp</dimen>
     <dimen name="settings_border_width">3dp</dimen>
+    <dimen name="settings_padding_regular">50dp</dimen>
 </resources>
