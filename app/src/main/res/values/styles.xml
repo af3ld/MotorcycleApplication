@@ -1,5 +1,4 @@
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:flatui="http://schemas.android.com/apk/res-auto">
+<resources>
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -18,16 +17,42 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="settings_frag_basic_editText">
-        <item name="android:textColor">@color/soft_steel</item>
-        <item name="android:textColorHint">@color/ink</item>
+    <style name="settings_frag">
         <item name="android:hint">@string/bike_hint</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="fl_theme">@array/deep</item>
+        <item name="fl_cornerRadius">5dp</item>
+        <item name="fl_textAppearance">fl_dark</item>
+        <item name="android:textAlignment">center</item>
     </style>
 
-    <style name="settings_frag_upper_editText" parent="settings_frag_basic_editText">
+    <style name="settings_frag_upper_editText" parent="settings_frag">
         <item name="android:layout_marginStart">@dimen/settings_outer_margin</item>
         <item name="android:layout_marginEnd">@dimen/settings_outer_margin</item>
         <item name="android:layout_marginTop">@dimen/settings_inner_margin</item>
+        <item name="fl_fieldStyle">fl_box</item>
+        <item name="fl_borderWidth">@dimen/settings_border_width</item>
+    </style>
+
+    <style name="settings_frag_mid_editText" parent="settings_frag">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:inputType">number</item>
+        <item name="fl_fieldStyle">fl_box</item>
+        <item name="fl_borderWidth">@dimen/settings_border_width</item>
+        <item name="android:layout_below">@id/fragment_settings_tires_edittext</item>
+        <item name="android:layout_marginTop">@dimen/settings_outer_margin</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+
+    <style name="SettingsButton" parent="settings_frag">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="fl_touchEffect">fl_ripple</item>
+        <item name="fl_blockButtonEffectHeight">3dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="fl_theme">@array/sky</item>
+        <item name="fl_textAppearance">fl_light</item>
     </style>
 
     <style name="RideAlert" parent="Theme.AppCompat.Light.Dialog">
@@ -35,15 +60,6 @@
         <item name="android:colorAccent">@color/ink</item>
         <item name="android:textColor">@color/ink</item>
         <item name="android:textColorPrimary">@color/ink</item>
-    </style>
-
-    <style name="SettingsButton">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:background">@color/ink</item>
-        <item name="android:textColor">@color/goldenrod</item>
-        <item name="android:layout_marginBottom">5dp</item>
     </style>
 
 </resources>
