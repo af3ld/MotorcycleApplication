@@ -22,14 +22,14 @@ import java.io.IOException;
  */
 public class SettingsFragment extends Fragment implements View.OnClickListener {
 
-    EditText name;
-    EditText make;
-    EditText model;
-    EditText tires;
-    EditText frontPsi;
-    EditText backPsi;
-    Button save;
-    Button clear;
+    private EditText name;
+    private EditText make;
+    private EditText model;
+    private EditText tires;
+    private EditText frontPsi;
+    private EditText backPsi;
+    private Button save;
+    private Button clear;
     public static final String TAG = SettingsFragment.class.getSimpleName();
     public static final String ARG_COLOR = "Color";
     public static final String ARG_INDEX = "Index";
@@ -59,6 +59,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.fragment_settings_save_button) {
+
             makeCheck(make.getText().toString());
 
             Toast.makeText(getContext() , getString(R.string.saved),Toast.LENGTH_SHORT ).show();
@@ -86,6 +87,10 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
             Toast.makeText(getContext() , R.string.cleared ,Toast.LENGTH_SHORT ).show();
 
         }
+    }
+
+    void ifEmpty(int asInt, String asStr){
+
     }
 
     void makeCheck(String makeString) {
