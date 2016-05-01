@@ -61,6 +61,8 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         if (v.getId() == R.id.fragment_settings_save_button) {
             makeCheck(make.getText().toString());
 
+            Toast.makeText(getContext() , getString(R.string.saved),Toast.LENGTH_SHORT ).show();
+
             Rides rideSaver = new Rides(getContext(), "name" );
             rideSaver.setMake(make.getText().toString());
             rideSaver.setModel(model.getText().toString());

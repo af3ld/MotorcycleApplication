@@ -1,91 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/goldenrod"
+    android:background="@color/soft_steel"
+    xmlns:flatui="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <EditText
-        android:layout_centerHorizontal="true"
-        android:id="@+id/fragment_settings_name"
+    <com.cengalabs.flatui.views.FlatEditText
         android:hint="@string/UserName"
+        android:id="@+id/fragment_settings_name"
+        style="@style/settings_frag"
+        android:layout_marginTop="@dimen/settings_inner_margin"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_gravity="center"
+        android:paddingLeft="@dimen/settings_padding_regular"
+        android:paddingRight="@dimen/settings_padding_regular"
+        flatui:fl_fieldStyle="fl_flat"
+        flatui:fl_textAppearance="fl_light"
+        />
 
-    <EditText
-        android:id="@+id/fragment_settings_make_edittext"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textCapSentences"
-        android:paddingTop="75dp"
-        android:hint="@string/make"
-        style="@style/settings_frag_basic_editText" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/fragment_settings_model_edittext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/fragment_settings_make_edittext"
-        android:hint="@string/model"
-        style="@style/settings_frag_basic_editText" />
+        <com.cengalabs.flatui.views.FlatEditText
+            android:id="@+id/fragment_settings_make_edittext"
+            style="@style/settings_frag_upper_editText"
+            android:layout_width="match_parent"
+            android:hint="@string/make"
+            android:inputType="textCapSentences" />
 
-    <EditText
-        android:id="@+id/fragment_settings_tires_edittext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/fragment_settings_model_edittext"
-        android:layout_centerInParent="true"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
-        android:paddingTop="100dp"
-        android:hint="@string/tires"
-        style="@style/settings_frag_basic_editText" />
 
-    <EditText
-        android:inputType="number"
-        android:id="@+id/fragment_settings_psi_front_edittext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/fragment_settings_tires_edittext"
-        android:hint="@string/frontPSI_hint"
-        android:paddingLeft="60dp"
-        android:paddingRight="60dp"
-        style="@style/settings_frag_basic_editText" />
+        <com.cengalabs.flatui.views.FlatEditText
+            android:id="@+id/fragment_settings_model_edittext"
+            style="@style/settings_frag_upper_editText"
+            android:layout_width="match_parent"
+            android:layout_below="@id/fragment_settings_make_edittext"
+            android:hint="@string/model"
 
-    <EditText
-        android:inputType="number"
-        android:id="@+id/fragment_settings_psi_back_edittext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/fragment_settings_tires_edittext"
-        android:hint="@string/backPSI_hint"
-        android:paddingLeft="60dp"
-        android:paddingRight="60dp"
-        style="@style/settings_frag_basic_editText"
-         />
+            />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
-
-        <Button
-            android:id="@+id/fragment_settings_save_button"
+        <com.cengalabs.flatui.views.FlatEditText
+            android:id="@+id/fragment_settings_tires_edittext"
+            style="@style/settings_frag_upper_editText"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/ink"
-            android:textColor="@color/goldenrod"
-            android:text="@string/savebutton"/>
+            android:layout_below="@id/fragment_settings_model_edittext"
+            android:layout_centerInParent="true"
+            android:hint="@string/tires"
+            android:paddingLeft="@dimen/settings_padding_regular"
+            android:paddingRight="@dimen/settings_padding_regular" />
 
-        <Button
-            android:id="@+id/fragment_settings_clear_button"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/ink"
-            android:textColor="@color/goldenrod"
-            android:text="@string/clear_button"/>
-    </LinearLayout>
-</RelativeLayout>
+            android:layout_below="@id/fragment_settings_tires_edittext"
+            android:orientation="horizontal">
+
+            <com.cengalabs.flatui.views.FlatEditText
+                android:id="@+id/fragment_settings_psi_front_edittext"
+                style="@style/settings_frag_mid_editText"
+                android:layout_marginEnd="@dimen/settings_inner_margin"
+                android:layout_marginStart="@dimen/settings_outer_margin"
+                android:hint="@string/frontPSI_hint" />
+
+            <com.cengalabs.flatui.views.FlatEditText
+                android:id="@+id/fragment_settings_psi_back_edittext"
+                style="@style/settings_frag_mid_editText"
+                android:layout_marginEnd="@dimen/settings_outer_margin"
+                android:layout_marginStart="@dimen/settings_inner_margin"
+                android:hint="@string/backPSI_hint" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <com.cengalabs.flatui.views.FlatButton
+                android:id="@+id/fragment_settings_save_button"
+                style="@style/SettingsButton"
+                android:layout_marginEnd="@dimen/settings_inner_margin"
+                android:layout_marginStart="@dimen/settings_outer_margin"
+                android:text="@string/savebutton" />
+
+            <com.cengalabs.flatui.views.FlatButton
+                android:id="@+id/fragment_settings_clear_button"
+                style="@style/SettingsButton"
+                android:layout_marginEnd="@dimen/settings_outer_margin"
+                android:layout_marginStart="@dimen/settings_inner_margin"
+                android:text="@string/clear_button" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>
