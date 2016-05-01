@@ -11,16 +11,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:hint="@string/UserName" />
+        android:hint="@string/UserName"
+        android:layout_marginTop="@dimen/settings_inner_margin"
+        style="@style/settings_frag_upper_editText"
+        />
 
     <com.cengalabs.flatui.views.FlatEditText
         android:id="@+id/fragment_settings_make_edittext"
-        style="@style/settings_frag_basic_editText"
+        style="@style/settings_frag_upper_editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/make"
         android:inputType="textCapSentences"
-        android:paddingTop="75dp" />
+        flatui:fl_fieldStyle="fl_box"/>
 
     <com.cengalabs.flatui.views.FlatEditText
         android:id="@+id/fragment_settings_model_edittext"
@@ -73,8 +76,8 @@
         <com.cengalabs.flatui.views.FlatButton
             android:id="@+id/fragment_settings_save_button"
             style="@style/SettingsButton"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="5dp"
+            android:layout_marginStart="@dimen/settings_outer_margin"
+            android:layout_marginEnd="@dimen/settings_inner_margin"
             flatui:fl_touchEffect="fl_ripple"
             flatui:fl_blockButtonEffectHeight="3dp"
             android:text="@string/savebutton" />
@@ -82,8 +85,8 @@
         <com.cengalabs.flatui.views.FlatButton
             android:id="@+id/fragment_settings_clear_button"
             style="@style/SettingsButton"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginStart="@dimen/settings_inner_margin"
+            android:layout_marginEnd="@dimen/settings_outer_margin"
             flatui:fl_touchEffect="fl_ripple"
             flatui:fl_blockButtonEffectHeight="3dp"
             android:text="@string/clear_button" />

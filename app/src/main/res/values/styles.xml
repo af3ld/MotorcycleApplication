@@ -1,4 +1,5 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:flatui="http://schemas.android.com/apk/res-auto">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -21,6 +22,12 @@
         <item name="android:textColor">@color/soft_steel</item>
         <item name="android:textColorHint">@color/ink</item>
         <item name="android:hint">@string/bike_hint</item>
+    </style>
+
+    <style name="settings_frag_upper_editText" parent="settings_frag_basic_editText">
+        <item name="android:layout_marginStart">@dimen/settings_outer_margin</item>
+        <item name="android:layout_marginEnd">@dimen/settings_outer_margin</item>
+        <item name="android:layout_marginTop">@dimen/settings_inner_margin</item>
     </style>
 
     <style name="RideAlert" parent="Theme.AppCompat.Light.Dialog">
