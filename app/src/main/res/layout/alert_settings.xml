@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:flatui="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/settings_inner_margin"
+    android:orientation="vertical"
+    flatui:fl_theme="@array/dark">
+
+
+    <com.cengalabs.flatui.views.FlatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/settings_inner_margin"
+        android:layout_marginStart="@dimen/settings_inner_margin"
+        android:hint="@android:string/ok"
+        android:text="@android:string/ok"
+        android:id="@+id/alert_settings_okButton"
+        flatui:fl_blockButtonEffectHeight="3dp"
+        flatui:fl_textAppearance="fl_light"
+        flatui:fl_touchEffect="fl_ripple"
+        flatui:fl_cornerRadius="5dp"/>
+
+
+</LinearLayout>

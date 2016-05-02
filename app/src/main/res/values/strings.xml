@@ -27,4 +27,5 @@
     <string name="saveRideMessage">Would you like to save this ride?</string>
     <string name="rideStart">Ride Start</string>
     <string name="rideEnd">Ride End</string>
+    <string name="ifEmptyFields">Please complete all the fields</string>
 </resources>

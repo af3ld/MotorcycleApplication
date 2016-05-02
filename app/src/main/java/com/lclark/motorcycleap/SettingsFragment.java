@@ -1,16 +1,24 @@
 package com.lclark.motorcycleap;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.lclark.motorcycleap.RiderStatistics.Rides;
@@ -33,6 +41,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     public static final String TAG = SettingsFragment.class.getSimpleName();
     public static final String ARG_COLOR = "Color";
     public static final String ARG_INDEX = "Index";
+
     public static SettingsFragment newInstance(@ColorInt int color, int index) {
 
         SettingsFragment fragment = new SettingsFragment();
@@ -60,22 +69,22 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         if (v.getId() == R.id.fragment_settings_save_button) {
 
-            makeCheck(make.getText().toString());
-
-            Toast.makeText(getContext() , getString(R.string.saved),Toast.LENGTH_SHORT ).show();
-
-            Rides rideSaver = new Rides(getContext(), "name" );
-            rideSaver.setMake(make.getText().toString());
-            rideSaver.setModel(model.getText().toString());
-            rideSaver.setTires(model.getText().toString());
-            rideSaver.setBackPsi(Long.parseLong(frontPsi.getText().toString()));
-            rideSaver.setFrontPsi(Long.parseLong(backPsi.getText().toString()));
-            try {
-                rideSaver.save(getContext());
-            } catch (IOException e) {
-                e.printStackTrace();
+            EditText[] allEditTexts = {name, make, model, tires, frontPsi, backPsi};
+            if (ifNotEmpty(allEditTexts)) {
+                makeCheck(make.getText().toString());
+                Toast.makeText(getContext(), getString(R.string.saved), Toast.LENGTH_SHORT).show();
+                Rides rideSaver = new Rides(getContext(), "name");
+                rideSaver.setMake(make.getText().toString());
+                rideSaver.setModel(model.getText().toString());
+                rideSaver.setTires(model.getText().toString());
+                rideSaver.setBackPsi(Long.parseLong(frontPsi.getText().toString()));
+                rideSaver.setFrontPsi(Long.parseLong(backPsi.getText().toString()));
+                try {
+                    rideSaver.save(getContext());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-
         }
 
         if (v.getId() == R.id.fragment_settings_clear_button) {
@@ -84,13 +93,41 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
             tires.setText("");
             frontPsi.setText("");
             backPsi.setText("");
-            Toast.makeText(getContext() , R.string.cleared ,Toast.LENGTH_SHORT ).show();
+            Toast.makeText(getContext(), R.string.cleared, Toast.LENGTH_SHORT).show();
 
         }
     }
 
-    void ifEmpty(int asInt, String asStr){
+    Boolean ifNotEmpty(EditText[] fields) {
+        for (EditText et : fields) {
+            if (et.getText().toString().isEmpty()) {
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
+                        .setTitle(android.R.string.dialog_alert_title)
+                        .setMessage(R.string.ifEmptyFields);
+                final FrameLayout frameView = new FrameLayout(getContext());
+                builder.setView(frameView);
+                final AlertDialog alertDialog = builder.create();
+                LayoutInflater inflater = alertDialog.getLayoutInflater();
+                View dView = inflater.inflate(R.layout.alert_settings, frameView);
+                Button okButton = (Button) dView.findViewById(R.id.alert_settings_okButton);
+                okButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.cancel();
+                    }
+                });
 
+                Window window = alertDialog.getWindow();
+                WindowManager.LayoutParams wlp = window.getAttributes();
+                wlp.y = Gravity.CENTER_VERTICAL + 200;
+                wlp.x = Gravity.CENTER_HORIZONTAL;
+                wlp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+                window.setAttributes(wlp);
+                alertDialog.show();
+                return false;
+            }
+        }
+        return true;
     }
 
     void makeCheck(String makeString) {
