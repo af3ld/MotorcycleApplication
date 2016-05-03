@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import com.lclark.motorcycleap.R;
 
+import static java.lang.Math.round;
+
 /**
  * Created by student22 on 4/14/16.
  */
@@ -72,8 +74,17 @@ public class RiderStatisticsFragment extends Fragment implements SensorEventList
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_GRAVITY) {
-            speedometer.setText("value 1 = " + event.values[0] + "\n Value 2 = " + event.values[1] + "\nvalue 3 " + event.values[2]);
+
+            double x = round ( event.values[0] * 90.0/sensorManager.GRAVITY_EARTH ) ;
+            double y = round ( event.values[1] * 90.0/sensorManager.GRAVITY_EARTH );
+            double z = round ( event.values[2] * 90.0/sensorManager.GRAVITY_EARTH );
+
+
+
+            speedometer.setText("x = " + x + "\n y = " + y +   "\nz = " + z );
         }
+
+
         }
 
 
