@@ -58,10 +58,7 @@ public class RiderStatisticsFragment extends Fragment implements SensorEventList
 
         sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
         Sensor gravitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
-        Sensor rotationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
-
-        sensorManager.registerListener(this, rotationSensor, SensorManager.SENSOR_DELAY_FASTEST);
-        sensorManager.registerListener(this, gravitySensor, SensorManager.SENSOR_DELAY_FASTEST);
+                sensorManager.registerListener(this, gravitySensor, SensorManager.SENSOR_DELAY_FASTEST);
 
         speedometer = (TextView) getActivity().findViewById(R.id.fragment_rider_stats_currentspeed_textView);
 
@@ -74,10 +71,16 @@ public class RiderStatisticsFragment extends Fragment implements SensorEventList
 
     @Override
     public void onSensorChanged(SensorEvent event) {
+        if (event.sensor.getType() == Sensor.TYPE_GRAVITY) {
+            speedometer.setText("value 1 = " + event.values[0] + "\n Value 2 = " + event.values[1] + "\nvalue 3 " + event.values[2]);
+        }
+        }
 
-        speedometer.setText(String.format("%f", (event.values[0] * 60 * 60)/ 1000  ) + " km/h");
-       // sensorManager.getOrientation(sensorManager.getRotationMatrix());
-    }
+
+
+
+
+
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
