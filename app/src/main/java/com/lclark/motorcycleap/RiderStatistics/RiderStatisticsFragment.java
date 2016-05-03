@@ -16,15 +16,19 @@ import android.widget.TextView;
 
 import com.lclark.motorcycleap.R;
 
-import static java.lang.Math.round;
+import static java.lang.StrictMath.abs;
+import static java.lang.StrictMath.round;
+
 
 /**
  * Created by student22 on 4/14/16.
  */
 public class RiderStatisticsFragment extends Fragment implements SensorEventListener {
     SensorManager sensorManager;
-    TextView speedometer;
+    TextView leanAngleTextView;
+    TextView maxLeanAngleTextView;
 
+double maxLean;
     public Context mContext;
     public static final String TAG = RiderStatisticsFragment.class.getSimpleName();
     public static final String ARG_COLOR = "Color";
@@ -50,6 +54,7 @@ public class RiderStatisticsFragment extends Fragment implements SensorEventList
 
         RiderStatisticsAdapter mAdapter = new RiderStatisticsAdapter(getContext());
         listView.setAdapter(mAdapter);
+maxLean = 0;
 
         return rootView;
 
@@ -60,37 +65,47 @@ public class RiderStatisticsFragment extends Fragment implements SensorEventList
 
         sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
         Sensor gravitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
-                sensorManager.registerListener(this, gravitySensor, SensorManager.SENSOR_DELAY_FASTEST);
+        sensorManager.registerListener(this, gravitySensor, SensorManager.SENSOR_DELAY_FASTEST);
 
-        speedometer = (TextView) getActivity().findViewById(R.id.fragment_rider_stats_currentspeed_textView);
-
-
-
-
+        leanAngleTextView = (TextView) getActivity().findViewById(R.id.fragment_rider_stats_current_lean_angle_text_view);
+        maxLeanAngleTextView = (TextView) getActivity().findViewById(R.id.fragment_rider_stats_current_max_lean_textview);
 
         super.onActivityCreated(savedInstanceState);
     }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
+
         if (event.sensor.getType() == Sensor.TYPE_GRAVITY) {
+            double x = event.values[0] * 90.0 / sensorManager.GRAVITY_EARTH;
+            x = x * 100;
+            x = round(x);
+            x = x / 100;
+            if (x > 0) {
+                leanAngleTextView.setText("← " + x + "°");
+            }
+            if (x < 0) {
+                leanAngleTextView.setText(-x + "°" + " →");
+            }
+            if (x == 0) {
+                leanAngleTextView.setText(" 0° ");
 
-            double x = round ( event.values[0] * 90.0/sensorManager.GRAVITY_EARTH ) ;
-            double y = round ( event.values[1] * 90.0/sensorManager.GRAVITY_EARTH );
-            double z = round ( event.values[2] * 90.0/sensorManager.GRAVITY_EARTH );
+            }
+
+            if ( abs(x) > maxLean ) {
+                maxLean = abs(x);
+
+                maxLeanAngleTextView.setText("Max Lean = " + maxLean);
+
+            }
 
 
 
-            speedometer.setText("x = " + x + "\n y = " + y +   "\nz = " + z );
+
         }
 
 
-        }
-
-
-
-
-
+    }
 
 
     @Override

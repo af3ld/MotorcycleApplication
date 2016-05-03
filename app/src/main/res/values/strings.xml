@@ -28,4 +28,6 @@
     <string name="rideStart">Ride Start</string>
     <string name="rideEnd">Ride End</string>
     <string name="ifEmptyFields">Please complete all the fields</string>
+    <string name="current_lean_angle">Current Lean angle:</string>
+    <string name="max_lean_angle">Max Lean Angle</string>
 </resources>

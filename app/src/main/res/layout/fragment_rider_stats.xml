@@ -7,14 +7,27 @@
 
     <TextView
 
-        android:id="@+id/fragment_rider_stats_currentspeed_textView"
+        android:id="@+id/fragment_rider_stats_current_lean_angle_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:hint="@string/currentSpeed_hint"
+        android:hint="@string/current_lean_angle"
         android:textColorHint="@android:color/white"
         android:textColor="@color/ink"
-        android:textSize="60sp"
+        android:textSize="30sp"
+        android:padding="10dp"/>
+
+    <TextView
+
+        android:id="@+id/fragment_rider_stats_current_max_lean_textview"
+        android:layout_below="@id/fragment_rider_stats_current_lean_angle_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="@string/max_lean_angle"
+        android:textColorHint="@android:color/white"
+        android:textColor="@color/ink"
+        android:textSize="30sp"
         android:padding="10dp"/>
 
 
@@ -22,7 +35,7 @@
         android:id="@+id/fragment_rider_stats_listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/fragment_rider_stats_currentspeed_textView"
+        android:layout_below="@id/fragment_rider_stats_current_max_lean_textview"
 
 
 
