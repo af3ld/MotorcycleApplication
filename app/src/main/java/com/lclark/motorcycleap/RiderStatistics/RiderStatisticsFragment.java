@@ -20,7 +20,7 @@ import com.lclark.motorcycleap.R;
  * Created by student22 on 4/14/16.
  */
 public class RiderStatisticsFragment extends Fragment implements SensorEventListener {
-
+    SensorManager sensorManager;
     TextView speedometer;
 
     public Context mContext;
@@ -56,9 +56,13 @@ public class RiderStatisticsFragment extends Fragment implements SensorEventList
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
 
-        SensorManager sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
+        sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
         Sensor gravitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
+        Sensor rotationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
+
+        sensorManager.registerListener(this, rotationSensor, SensorManager.SENSOR_DELAY_FASTEST);
         sensorManager.registerListener(this, gravitySensor, SensorManager.SENSOR_DELAY_FASTEST);
+
         speedometer = (TextView) getActivity().findViewById(R.id.fragment_rider_stats_currentspeed_textView);
 
 
@@ -72,6 +76,7 @@ public class RiderStatisticsFragment extends Fragment implements SensorEventList
     public void onSensorChanged(SensorEvent event) {
 
         speedometer.setText(String.format("%f", (event.values[0] * 60 * 60)/ 1000  ) + " km/h");
+       // sensorManager.getOrientation(sensorManager.getRotationMatrix());
     }
 
     @Override
