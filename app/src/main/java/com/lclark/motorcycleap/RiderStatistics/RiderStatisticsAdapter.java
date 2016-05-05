@@ -33,8 +33,7 @@ public class RiderStatisticsAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-//        return ridesList.get(position)();
-        return 3;
+      return ridesList.get(position).getID();
     }
 
 

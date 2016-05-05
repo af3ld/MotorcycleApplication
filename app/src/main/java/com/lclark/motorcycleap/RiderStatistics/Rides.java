@@ -138,4 +138,9 @@ static String fileName;
     public static void setMake(String make) {
         Rides.make = make;
     }
+
+    public static long getID() {
+        long retme = Long.getLong(fileName);
+        return retme;
+    }
 }
