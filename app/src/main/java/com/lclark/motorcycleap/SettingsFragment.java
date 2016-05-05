@@ -72,15 +72,15 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
             EditText[] allEditTexts = {name, make, model, tires, frontPsi, backPsi};
             if (ifNotEmpty(allEditTexts)) {
                 makeCheck(make.getText().toString());
-                Toast.makeText(getContext(), getString(R.string.saved), Toast.LENGTH_SHORT).show();
                 Rides rideSaver = new Rides(getContext(), "name");
                 rideSaver.setMake(make.getText().toString());
                 rideSaver.setModel(model.getText().toString());
                 rideSaver.setTires(model.getText().toString());
                 rideSaver.setBackPsi(Long.parseLong(frontPsi.getText().toString()));
                 rideSaver.setFrontPsi(Long.parseLong(backPsi.getText().toString()));
+                Toast.makeText(getContext(), getString(R.string.saved), Toast.LENGTH_SHORT).show();
                 try {
-                    rideSaver.save(getContext());
+                    rideSaver.saveSettings(getContext());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

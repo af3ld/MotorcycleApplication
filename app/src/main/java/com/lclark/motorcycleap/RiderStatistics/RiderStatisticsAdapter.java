@@ -16,10 +16,13 @@ public class RiderStatisticsAdapter extends BaseAdapter {
 
     private Context mContext;
     private Rides ride;
+    private  Rides settings;
 
     public RiderStatisticsAdapter(Context context) {
         mContext = context;
         ride = new Rides();
+
+        settings = Rides.load(context,"settings", settings);
     }
 
 
@@ -47,11 +50,13 @@ return temp;
         View v = View.inflate(mContext, R.layout.fragment_rider_stats_cardview, null);
         TextView maxLeanTextView = (TextView) v.findViewById(R.id.card_view_max_lean);
         TextView rideTime = (TextView) v.findViewById(R.id.card_view_ride_length);
+        TextView psi = (TextView) v.findViewById(R.id.card_view_psi);
 
         long minutes=((ride.startTime)/1000)/60;
         int seconds = (int) (ride.startTime / 1000) % 60 ;
         rideTime.setText("Duration = " + minutes +" min " + seconds + " seconds" );
         maxLeanTextView.setText("MAX LEAN ANGLE = " + ride.max_lean + "");
+        psi.setText("Psi Front:" + settings.frontPsi + " Psi Back: " + settings.getBackPsi());
         return v;
     }
 

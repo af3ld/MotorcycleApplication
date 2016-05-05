@@ -118,6 +118,14 @@ return sharedPref.getInt("ride_id", 0);
        fos.close();
     }
 
+    public void saveSettings(Context context ) throws IOException {
+
+        FileOutputStream fos = context.openFileOutput("settings", MODE_PRIVATE);
+        ObjectOutputStream os = new ObjectOutputStream(fos);
+        os.writeObject(this);
+        os.close();
+        fos.close();
+    }
 
 
     public static String getModel() {
