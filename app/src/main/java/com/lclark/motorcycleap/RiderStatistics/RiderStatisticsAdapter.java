@@ -48,7 +48,8 @@ return temp;
         TextView maxLeanTextView = (TextView) v.findViewById(R.id.card_view_max_lean);
         TextView rideTime = (TextView) v.findViewById(R.id.card_view_ride_length);
 
-        rideTime.setText("Duration = " + ride.startTime);
+        long minutes=((ride.startTime)/1000)/60;
+        rideTime.setText("Duration = " + minutes +" min " );
         maxLeanTextView.setText("MAX LEAN ANGLE = " + ride.max_lean + "");
         return v;
     }

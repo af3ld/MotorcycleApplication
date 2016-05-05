@@ -35,6 +35,7 @@ public class FabClickListener implements View.OnClickListener, View.OnLongClickL
         else if (ridingNow == 1) {
             Toast.makeText(v.getContext(), "ENDING RIDE", Toast.LENGTH_SHORT).show();
             try {
+                ride.startTime = System.currentTimeMillis() - ride.startTime;
                 ride.save(v.getContext());
             } catch (IOException e) {
                 e.printStackTrace();
