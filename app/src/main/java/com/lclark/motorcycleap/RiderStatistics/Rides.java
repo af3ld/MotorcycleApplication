@@ -38,6 +38,8 @@ static String fileName;
     static String make;
     static String model;
 
+    long startTime;
+
     double CordinateX;
     double CordinateY;
 
@@ -86,6 +88,7 @@ static String fileName;
         editor.putInt("ride_id", temp );
         editor.commit();
         fileName = temp + "";
+startTime = System.currentTimeMillis();
 
     }
 
@@ -94,8 +97,8 @@ static String fileName;
     }
    public static int getCount(Context context) {
         SharedPreferences sharedPref = context.getSharedPreferences("Ride_id", Context.MODE_APPEND);
-       int temp = sharedPref.getInt("ride_id", 0);
-return temp;
+return sharedPref.getInt("ride_id", 0);
+
 
     }
 

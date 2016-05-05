@@ -30,4 +30,6 @@
     <string name="ifEmptyFields">Please complete all the fields</string>
     <string name="current_lean_angle">Current Lean angle:</string>
     <string name="max_lean_angle">Max Lean Angle</string>
+    <string name="maxlean">maxLean</string>
+    <string name="time">Time</string>
 </resources>
