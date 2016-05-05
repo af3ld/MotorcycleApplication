@@ -1,13 +1,13 @@
 package com.lclark.motorcycleap.RiderStatistics;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -17,13 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.lclark.motorcycleap.R;
-
-import java.util.ArrayList;
 
 import static java.lang.StrictMath.abs;
 import static java.lang.StrictMath.round;
@@ -36,8 +30,10 @@ public class RiderStatisticsFragment extends Fragment implements SensorEventList
     SensorManager sensorManager;
     TextView leanAngleTextView;
     TextView maxLeanAngleTextView;
+    FabClickListener fabClickListener;
 
-double maxLean;
+
+
     public Context mContext;
     public static final String TAG = RiderStatisticsFragment.class.getSimpleName();
     public static final String ARG_COLOR = "Color";
@@ -52,19 +48,19 @@ double maxLean;
         return fragment;
     }
 
-    Boolean riding;
+
+
     public void setUpFAB(View rootView) {
         FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.stats_fab);
         fab.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.sand));
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        fab.setOnClickListener(fabClickListener);
 
-
-            }
-        });
     }
+
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        fabClickListener = new FabClickListener();
+        fabClickListener.setRidingNow( 0 );
         View rootView = inflater.inflate(R.layout.fragment_rider_stats, container, false);
         setUpFAB(rootView);
         Bundle args = getArguments();
@@ -76,7 +72,7 @@ double maxLean;
 
         RiderStatisticsAdapter mAdapter = new RiderStatisticsAdapter(getContext());
         listView.setAdapter(mAdapter);
-maxLean = 0;
+
 
         return rootView;
 
@@ -85,11 +81,12 @@ maxLean = 0;
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
 
+
+
+
         sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
         Sensor gravitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
         sensorManager.registerListener(this, gravitySensor, SensorManager.SENSOR_DELAY_FASTEST);
-
-
 
         leanAngleTextView = (TextView) getActivity().findViewById(R.id.fragment_rider_stats_current_lean_angle_text_view);
         maxLeanAngleTextView = (TextView) getActivity().findViewById(R.id.fragment_rider_stats_current_max_lean_textview);
@@ -99,8 +96,17 @@ maxLean = 0;
 
     @Override
     public void onSensorChanged(SensorEvent event) {
+        if (event.sensor.getType() == Sensor.TYPE_GRAVITY && fabClickListener.ridingNow==0) {
+            leanAngleTextView.setTextSize(20);
+            maxLeanAngleTextView.setTextSize(20);
+            leanAngleTextView.setText("Press Ride button to Begin Ride");
+            maxLeanAngleTextView.setText("Attach your phone to the bike \n With top edge parallel to the ground");
 
-        if (event.sensor.getType() == Sensor.TYPE_GRAVITY) {
+
+        }
+        if (event.sensor.getType() == Sensor.TYPE_GRAVITY && fabClickListener.ridingNow==1) {
+            leanAngleTextView.setTextSize(30);
+            maxLeanAngleTextView.setTextSize(30);
             double x = event.values[0] * 90.0 / sensorManager.GRAVITY_EARTH;
             x = x * 100;
             x = round(x);
@@ -116,10 +122,9 @@ maxLean = 0;
 
             }
 
-            if ( abs(x) > maxLean ) {
-                maxLean = abs(x);
-
-                maxLeanAngleTextView.setText("Max Lean = " + maxLean);
+            if ( abs(x) > fabClickListener.ride.max_lean ) {
+                fabClickListener.ride.max_lean = abs(x);
+                maxLeanAngleTextView.setText("Max Lean = " + fabClickListener.ride.max_lean);
 
             }
 

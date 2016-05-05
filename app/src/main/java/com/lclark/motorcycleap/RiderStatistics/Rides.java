@@ -21,7 +21,7 @@ public class Rides {
 
 static String fileName;
 
-
+    double max_lean;
     double max_speed;
     double average_speed;
 

@@ -144,8 +144,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
     /*
     * Set up and display the Ride Alert
-    * Positive choice: Save the ride and clear map
-    * Negative choice: clear map and do not save the ride
+    * Positive choice: Save the ridingNow and clear map
+    * Negative choice: clear map and do not save the ridingNow
     */
     private void mapAlert(){
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.RideAlert)
