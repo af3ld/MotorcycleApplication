@@ -1,6 +1,7 @@
 package com.lclark.motorcycleap.RiderStatistics;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -27,16 +28,15 @@ import static java.lang.StrictMath.round;
  * Created by student22 on 4/14/16.
  */
 public class RiderStatisticsFragment extends Fragment implements SensorEventListener {
+
+    TextView shardPrefs;
+
     SensorManager sensorManager;
     TextView leanAngleTextView;
     TextView maxLeanAngleTextView;
     FabClickListener fabClickListener;
 
-
-
-    public Context mContext;
     public static final String TAG = RiderStatisticsFragment.class.getSimpleName();
-    public static final String ARG_COLOR = "Color";
     public static final String ARG_INDEX = "Index";
 
     public static RiderStatisticsFragment newInstance(int index) {
@@ -61,6 +61,8 @@ public class RiderStatisticsFragment extends Fragment implements SensorEventList
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         fabClickListener = new FabClickListener();
         fabClickListener.setRidingNow( 0 );
+
+
         View rootView = inflater.inflate(R.layout.fragment_rider_stats, container, false);
         setUpFAB(rootView);
         Bundle args = getArguments();
@@ -69,7 +71,6 @@ public class RiderStatisticsFragment extends Fragment implements SensorEventList
 
         rootView.setTag(TAG);
         ListView listView = (ListView) rootView.findViewById(R.id.fragment_rider_stats_listView);
-
         RiderStatisticsAdapter mAdapter = new RiderStatisticsAdapter(getContext());
         listView.setAdapter(mAdapter);
 
@@ -90,12 +91,16 @@ public class RiderStatisticsFragment extends Fragment implements SensorEventList
 
         leanAngleTextView = (TextView) getActivity().findViewById(R.id.fragment_rider_stats_current_lean_angle_text_view);
         maxLeanAngleTextView = (TextView) getActivity().findViewById(R.id.fragment_rider_stats_current_max_lean_textview);
+shardPrefs = (TextView) getActivity().findViewById(R.id.shared_prefs);
 
         super.onActivityCreated(savedInstanceState);
     }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
+
+shardPrefs.setText(Rides.getCount(getContext()) + "");
+
         if (event.sensor.getType() == Sensor.TYPE_GRAVITY && fabClickListener.ridingNow==0) {
             leanAngleTextView.setTextSize(20);
             maxLeanAngleTextView.setTextSize(20);
@@ -105,6 +110,7 @@ public class RiderStatisticsFragment extends Fragment implements SensorEventList
 
         }
         if (event.sensor.getType() == Sensor.TYPE_GRAVITY && fabClickListener.ridingNow==1) {
+
             leanAngleTextView.setTextSize(30);
             maxLeanAngleTextView.setTextSize(30);
             double x = event.values[0] * 90.0 / sensorManager.GRAVITY_EARTH;

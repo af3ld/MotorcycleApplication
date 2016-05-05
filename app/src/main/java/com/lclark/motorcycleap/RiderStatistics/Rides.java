@@ -2,14 +2,19 @@ package com.lclark.motorcycleap.RiderStatistics;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OptionalDataException;
+import java.io.Serializable;
+import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -17,10 +22,9 @@ import static android.content.Context.MODE_PRIVATE;
 /**
  * Created by 2yan on 26-Apr-16.
  */
-public class Rides {
+public class Rides implements Serializable {
 
 static String fileName;
-
     double max_lean;
     double max_speed;
     double average_speed;
@@ -34,36 +38,61 @@ static String fileName;
     static String make;
     static String model;
 
+    double CordinateX;
+    double CordinateY;
+
     public ArrayList<LatLng> getCordinates() {
-        return cordinates;
+        return new ArrayList<LatLng>(0);
     }
 
-    ArrayList<LatLng> cordinates;
+
 
     public void setCordinates(ArrayList<LatLng> cordinates) {
-        this.cordinates = new ArrayList<LatLng>(cordinates);
+
+
     }
 
 
-    public Rides load(Context context, String ID) throws IOException, ClassNotFoundException {
-    FileInputStream fis = context.openFileInput(ID +"");
-    ObjectInputStream is = new ObjectInputStream(fis);
-    Rides returnme = (Rides) is.readObject();
-    is.close();
-    fis.close();
-    return returnme;
+    public static Rides load(Context context, String ID)  {
+        Rides returnme;
+        try {
+            FileInputStream fis = context.openFileInput(ID);
+            ObjectInputStream is = new ObjectInputStream(fis);
+            returnme  = (Rides) is.readObject();
+            is.close();
+            fis.close();
+            return returnme;
+        }  catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (OptionalDataException e) {
+            e.printStackTrace();
+        } catch (StreamCorruptedException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    return new Rides(context);
     }
 
     public Rides(Context context){
 
-        SharedPreferences sharedPref = context.getSharedPreferences("Ride_id", Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = context.getSharedPreferences("Ride_id", Context.MODE_APPEND);
         SharedPreferences.Editor editor = sharedPref.edit();
 
-        int temp = sharedPref.getInt("ride_id", -1);
-        temp = temp++;
+        int temp = sharedPref.getInt("ride_id", 0);
+        temp++;
         editor.putInt("ride_id", temp );
-        editor.commit();
+        editor.apply();
         fileName = temp + "";
+
+    }
+   public static int getCount(Context context) {
+        SharedPreferences sharedPref = context.getSharedPreferences("Ride_id", Context.MODE_APPEND);
+       int temp = sharedPref.getInt("ride_id", 0);
+return temp;
+
     }
 
     public Rides(Context context, String ID){

@@ -1,6 +1,7 @@
 package com.lclark.motorcycleap.RiderStatistics;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -14,7 +15,7 @@ import java.util.List;
 public class RiderStatisticsAdapter extends BaseAdapter {
 
     private Context mContext;
-    private List<Rides> ridesList;
+    private Rides ride;
 
     public RiderStatisticsAdapter(Context context) {
         mContext = context;
@@ -23,26 +24,28 @@ public class RiderStatisticsAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return (ridesList != null) ? ridesList.size() : 0;
+        SharedPreferences sharedPref = mContext.getSharedPreferences("Ride_id", Context.MODE_PRIVATE);
+        int temp = sharedPref.getInt("ride_id", 0);
+return temp;
     }
 
     @Override
     public Object getItem(int position) {
-        return ridesList.get(position);
+        return Rides.load(mContext, position +"");
     }
 
     @Override
     public long getItemId(int position) {
-      return ridesList.get(position).getID();
+        return position;
     }
-
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View v = View.inflate(mContext, R.layout.fragment_rider_stats_cardview, null);
-        TextView frontPsi = (TextView) v.findViewById(R.id.rider_stats_card_view_Front_PSI);
+        ride = Rides.load(mContext, position +"");
 
-        frontPsi.setText(ridesList.get(position).getBackPsi() + "");
+        View v = View.inflate(mContext, R.layout.fragment_rider_stats_cardview, null);
+        TextView maxLeanTextView = (TextView) v.findViewById(R.id.card_view_max_lean);
+        maxLeanTextView.setText(ride.getMax_speed() + "");
         return v;
     }
 

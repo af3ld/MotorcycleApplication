@@ -30,6 +30,11 @@
         android:textSize="30sp"
         android:padding="10dp"/>
 
+    <TextView
+        android:id="@+id/shared_prefs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"/>
 
     <ListView
         android:id="@+id/fragment_rider_stats_listView"

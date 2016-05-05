@@ -12,28 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/rider_stats_card_view_Ride_Number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/rider_stats_card_view_Front_PSI"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-        <TextView
-            android:id="@+id/rider_stats_card_view_Max_speed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/rider_stats_card_view_Front_Average_Speed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/rider_stats_card_view_Back_PSI"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+<TextView
+    android:id="@+id/card_view_max_lean"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="maxLean"/>
 
     </RelativeLayout>
 
