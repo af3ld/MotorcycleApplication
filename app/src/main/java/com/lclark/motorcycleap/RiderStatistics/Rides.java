@@ -80,15 +80,7 @@ static String fileName;
 
     public Rides(Context context){
 
-        SharedPreferences sharedPref = context.getSharedPreferences("Ride_id", Context.MODE_APPEND);
-        SharedPreferences.Editor editor = sharedPref.edit();
-
-        int temp = sharedPref.getInt("ride_id", 0);
-        temp++;
-        editor.putInt("ride_id", temp );
-        editor.commit();
-        fileName = temp + "";
-startTime = System.currentTimeMillis();
+ startTime = System.currentTimeMillis();
 
     }
 
@@ -108,6 +100,16 @@ return sharedPref.getInt("ride_id", 0);
     }
 
    public void save(Context context ) throws IOException {
+
+
+       SharedPreferences sharedPref = context.getSharedPreferences("Ride_id", Context.MODE_APPEND);
+       SharedPreferences.Editor editor = sharedPref.edit();
+
+       int temp = sharedPref.getInt("ride_id", 0);
+       temp++;
+       editor.putInt("ride_id", temp );
+       editor.commit();
+       fileName = temp + "";
 
        FileOutputStream fos = context.openFileOutput(fileName, MODE_PRIVATE);
        ObjectOutputStream os = new ObjectOutputStream(fos);

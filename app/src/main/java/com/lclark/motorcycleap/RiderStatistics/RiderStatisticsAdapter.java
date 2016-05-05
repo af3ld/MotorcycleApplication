@@ -26,7 +26,7 @@ public class RiderStatisticsAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         SharedPreferences sharedPref = mContext.getSharedPreferences("Ride_id", Context.MODE_PRIVATE);
-        int temp = sharedPref.getInt("ride_id", -1);
+        int temp = sharedPref.getInt("ride_id", 1);
 return temp;
     }
 
@@ -49,7 +49,8 @@ return temp;
         TextView rideTime = (TextView) v.findViewById(R.id.card_view_ride_length);
 
         long minutes=((ride.startTime)/1000)/60;
-        rideTime.setText("Duration = " + minutes +" min " );
+        int seconds = (int) (ride.startTime / 1000) % 60 ;
+        rideTime.setText("Duration = " + minutes +" min " + seconds + " seconds" );
         maxLeanTextView.setText("MAX LEAN ANGLE = " + ride.max_lean + "");
         return v;
     }
