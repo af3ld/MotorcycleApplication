@@ -29,7 +29,7 @@ import static java.lang.StrictMath.round;
  */
 public class RiderStatisticsFragment extends Fragment implements SensorEventListener {
 
-    TextView shardPrefs;
+
 
     SensorManager sensorManager;
     TextView leanAngleTextView;
@@ -54,6 +54,7 @@ public class RiderStatisticsFragment extends Fragment implements SensorEventList
         FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.stats_fab);
         fab.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.sand));
         fab.setOnClickListener(fabClickListener);
+        fab.setOnLongClickListener(fabClickListener);
 
     }
 
@@ -91,7 +92,7 @@ public class RiderStatisticsFragment extends Fragment implements SensorEventList
 
         leanAngleTextView = (TextView) getActivity().findViewById(R.id.fragment_rider_stats_current_lean_angle_text_view);
         maxLeanAngleTextView = (TextView) getActivity().findViewById(R.id.fragment_rider_stats_current_max_lean_textview);
-shardPrefs = (TextView) getActivity().findViewById(R.id.shared_prefs);
+
 
         super.onActivityCreated(savedInstanceState);
     }
@@ -99,7 +100,6 @@ shardPrefs = (TextView) getActivity().findViewById(R.id.shared_prefs);
     @Override
     public void onSensorChanged(SensorEvent event) {
 
-shardPrefs.setText(Rides.getCount(getContext()) + "");
 
         if (event.sensor.getType() == Sensor.TYPE_GRAVITY && fabClickListener.ridingNow==0) {
             leanAngleTextView.setTextSize(20);

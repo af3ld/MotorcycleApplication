@@ -19,6 +19,7 @@ public class RiderStatisticsAdapter extends BaseAdapter {
 
     public RiderStatisticsAdapter(Context context) {
         mContext = context;
+        ride = new Rides();
     }
 
 
@@ -31,7 +32,7 @@ return temp;
 
     @Override
     public Object getItem(int position) {
-        return Rides.load(mContext, position +"");
+        return Rides.load(mContext, position +"", ride);
     }
 
     @Override
@@ -41,11 +42,11 @@ return temp;
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ride = Rides.load(mContext, position +"");
+        ride = Rides.load(mContext, position +"", ride);
 
         View v = View.inflate(mContext, R.layout.fragment_rider_stats_cardview, null);
         TextView maxLeanTextView = (TextView) v.findViewById(R.id.card_view_max_lean);
-        maxLeanTextView.setText(ride.getMax_speed() + "");
+        maxLeanTextView.setText("MAX LEAN ANGLE = " + ride.max_lean + "");
         return v;
     }
 

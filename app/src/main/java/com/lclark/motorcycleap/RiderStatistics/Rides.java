@@ -53,8 +53,8 @@ static String fileName;
     }
 
 
-    public static Rides load(Context context, String ID)  {
-        Rides returnme;
+    public static Rides load(Context context, String ID, Rides returnme)  {
+
         try {
             FileInputStream fis = context.openFileInput(ID);
             ObjectInputStream is = new ObjectInputStream(fis);
@@ -73,7 +73,7 @@ static String fileName;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-    return new Rides(context);
+    return returnme;
     }
 
     public Rides(Context context){
@@ -84,9 +84,13 @@ static String fileName;
         int temp = sharedPref.getInt("ride_id", 0);
         temp++;
         editor.putInt("ride_id", temp );
-        editor.apply();
+        editor.commit();
         fileName = temp + "";
 
+    }
+
+
+    public Rides(){
     }
    public static int getCount(Context context) {
         SharedPreferences sharedPref = context.getSharedPreferences("Ride_id", Context.MODE_APPEND);
