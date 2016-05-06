@@ -32,4 +32,8 @@
     <string name="max_lean_angle">Max Lean Angle</string>
     <string name="maxlean">maxLean</string>
     <string name="time">Time</string>
+    <string name="beginRide">Press Ride button to Begin Ride</string>
+    <string name="AttachInst">Attach your phone to the bike \n With top edge parallel to the ground</string>
+    <string name="leanLeft">← %s°</string>
+    <string name="leanRight">%s°→</string>
 </resources>

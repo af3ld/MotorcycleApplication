@@ -104,8 +104,8 @@ public class RiderStatisticsFragment extends Fragment implements SensorEventList
         if (event.sensor.getType() == Sensor.TYPE_GRAVITY && fabClickListener.ridingNow==0) {
             leanAngleTextView.setTextSize(20);
             maxLeanAngleTextView.setTextSize(20);
-            leanAngleTextView.setText("Press Ride button to Begin Ride");
-            maxLeanAngleTextView.setText("Attach your phone to the bike \n With top edge parallel to the ground");
+            leanAngleTextView.setText(R.string.beginRide);
+            maxLeanAngleTextView.setText(R.string.AttachInst);
 
 
         }
@@ -118,10 +118,12 @@ public class RiderStatisticsFragment extends Fragment implements SensorEventList
             x = round(x);
             x = x / 100;
             if (x > 0) {
-                leanAngleTextView.setText("← " + x + "°");
+                leanAngleTextView.setText(
+                        String.format(getResources().getString(R.string.leanLeft), x));
             }
             if (x < 0) {
-                leanAngleTextView.setText(-x + "°" + " →");
+                leanAngleTextView.setText(
+                        String.format(getResources().getString(R.string.leanRight), -x));
             }
             if (x == 0) {
                 leanAngleTextView.setText(" 0° ");
