@@ -154,12 +154,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                 .setMessage(R.string.saveRideMessage)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Rides ride = new Rides(getContext(), places);
+                       /* Rides ride = new Rides(getContext(), places);
                         try {
                             ride.save(getContext());
                         } catch (IOException e){
                             Log.e(TAG, e.getLocalizedMessage());
-                        }
+                        } */
                         mMap.clear();
                         Log.d(TAG, getActivity().getString(R.string.onMapCleared));
                     }

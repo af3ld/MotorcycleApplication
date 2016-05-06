@@ -105,7 +105,7 @@ public class Rides implements Serializable {
         SharedPreferences sharedPref = context.getSharedPreferences("Ride_id", Context.MODE_APPEND);
         SharedPreferences.Editor editor = sharedPref.edit();
 
-        int temp = sharedPref.getInt("ride_id", 0);
+        int temp = sharedPref.getInt("ride_id", -1);
         temp++;
         editor.putInt("ride_id", temp);
         editor.commit();

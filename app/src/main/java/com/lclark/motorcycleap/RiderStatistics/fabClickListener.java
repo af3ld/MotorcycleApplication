@@ -51,7 +51,7 @@ public class FabClickListener implements View.OnClickListener, View.OnLongClickL
         SharedPreferences.Editor editor = sharedPref.edit();
 
         Toast.makeText(v.getContext(), "RIDES DELETED", Toast.LENGTH_SHORT).show();
-        editor.putInt("ride_id", 0 );
+        editor.putInt("ride_id", -1 );
         editor.commit();
         return true;
 

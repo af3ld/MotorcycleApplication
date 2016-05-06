@@ -29,8 +29,8 @@ public class RiderStatisticsAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         SharedPreferences sharedPref = mContext.getSharedPreferences("Ride_id", Context.MODE_PRIVATE);
-        int temp = sharedPref.getInt("ride_id", 1);
-return temp;
+        int temp = sharedPref.getInt("ride_id", -1);
+return temp + 1;
     }
 
     @Override
