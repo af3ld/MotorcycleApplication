@@ -54,7 +54,7 @@ return temp;
 
         long minutes=((ride.startTime)/1000)/60;
         int seconds = (int) (ride.startTime / 1000) % 60 ;
-        rideTime.setText("Duration = " + minutes +" min " + seconds + " seconds" );
+        rideTime.setText(minutes +"m " + seconds + "s" );
         maxLeanTextView.setText("MAX LEAN ANGLE = " + ride.max_lean + "");
         psi.setText("Psi Front:" + settings.frontPsi + " Psi Back: " + settings.getBackPsi());
         return v;

@@ -2,18 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/goldenrod"
+    android:background="@color/snow_light"
     android:orientation="vertical">
 
     <TextView
-
         android:id="@+id/fragment_rider_stats_current_lean_angle_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:hint="@string/current_lean_angle"
         android:textColorHint="@android:color/white"
-        android:textColor="@color/ink"
+        android:textColor="#343434"
+
         android:textSize="30sp"
         android:padding="10dp"/>
 
@@ -26,7 +26,7 @@
         android:gravity="center"
         android:hint="@string/max_lean_angle"
         android:textColorHint="@android:color/white"
-        android:textColor="@color/ink"
+        android:textColor="#1d1d1d"
         android:textSize="30sp"
         android:padding="10dp"/>
 
@@ -43,13 +43,14 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/stats_fab"
-        android:background="@color/soft_steel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/motorcycle"
+        android:background="@color/blossom_dark"
+
         />
 
 </RelativeLayout>

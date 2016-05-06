@@ -52,7 +52,7 @@ public class RiderStatisticsFragment extends Fragment implements SensorEventList
 
     public void setUpFAB(View rootView) {
         FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.stats_fab);
-        fab.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.sand));
+        fab.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.candy_primary));
         fab.setOnClickListener(fabClickListener);
         fab.setOnLongClickListener(fabClickListener);
 
