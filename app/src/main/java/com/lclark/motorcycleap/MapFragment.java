@@ -84,6 +84,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_map, container, false);
         setUpFAB(rootView);
+        mContext = getContext();
         mapFragment = (MapView) rootView.findViewById(R.id.map_fragment);
         mapFragment.onCreate(savedInstanceState);
         mapFragment.getMapAsync(this);
@@ -153,7 +154,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                 .setMessage(R.string.saveRideMessage)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Rides ride = new Rides(getContext());
+                        Rides ride = new Rides(getContext(), places);
                         try {
                             ride.save(getContext());
                         } catch (IOException e){

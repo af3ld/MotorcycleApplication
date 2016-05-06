@@ -2,6 +2,8 @@ package com.lclark.motorcycleap.RiderStatistics;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.location.Location;
+import android.location.LocationManager;
 import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -24,10 +26,11 @@ import static android.content.Context.MODE_PRIVATE;
  */
 public class Rides implements Serializable {
 
-static String fileName;
+    static String fileName;
     double max_lean;
     double max_speed;
     double average_speed;
+    private double minutes, seconds = 60;
 
 
     static String tires;
@@ -48,77 +51,69 @@ static String fileName;
     }
 
 
-
     public void setCordinates(ArrayList<LatLng> cordinates) {
 
 
     }
 
 
-    public static Rides load(Context context, String ID, Rides returnme)  {
+    public static Rides load(Context context, String ID, Rides returnme) {
 
         try {
             FileInputStream fis = context.openFileInput(ID);
             ObjectInputStream is = new ObjectInputStream(fis);
-            returnme  = (Rides) is.readObject();
+            returnme = (Rides) is.readObject();
             is.close();
             fis.close();
             return returnme;
-        }  catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (OptionalDataException e) {
-            e.printStackTrace();
-        } catch (StreamCorruptedException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-    return returnme;
+        return returnme;
     }
 
-    public Rides(Context context){
+    public Rides(Context context,ArrayList<LatLng> places) {
 
- startTime = System.currentTimeMillis();
+        startTime = System.currentTimeMillis();
 
     }
 
 
-    public Rides(){
+    public Rides() {
     }
-   public static int getCount(Context context) {
+
+    public static int getCount(Context context) {
         SharedPreferences sharedPref = context.getSharedPreferences("Ride_id", Context.MODE_APPEND);
-return sharedPref.getInt("ride_id", 0);
+        return sharedPref.getInt("ride_id", 0);
 
 
     }
 
-    public Rides(Context context, String ID){
+    public Rides(Context context, String ID) {
         fileName = ID;
 
     }
 
-   public void save(Context context ) throws IOException {
+    public void save(Context context) throws IOException {
 
 
-       SharedPreferences sharedPref = context.getSharedPreferences("Ride_id", Context.MODE_APPEND);
-       SharedPreferences.Editor editor = sharedPref.edit();
+        SharedPreferences sharedPref = context.getSharedPreferences("Ride_id", Context.MODE_APPEND);
+        SharedPreferences.Editor editor = sharedPref.edit();
 
-       int temp = sharedPref.getInt("ride_id", 0);
-       temp++;
-       editor.putInt("ride_id", temp );
-       editor.commit();
-       fileName = temp + "";
+        int temp = sharedPref.getInt("ride_id", 0);
+        temp++;
+        editor.putInt("ride_id", temp);
+        editor.commit();
+        fileName = temp + "";
 
-       FileOutputStream fos = context.openFileOutput(fileName, MODE_PRIVATE);
-       ObjectOutputStream os = new ObjectOutputStream(fos);
-       os.writeObject(this);
-       os.close();
-       fos.close();
+        FileOutputStream fos = context.openFileOutput(fileName, MODE_PRIVATE);
+        ObjectOutputStream os = new ObjectOutputStream(fos);
+        os.writeObject(this);
+        os.close();
+        fos.close();
     }
 
-    public void saveSettings(Context context ) throws IOException {
+    public void saveSettings(Context context) throws IOException {
 
         FileOutputStream fos = context.openFileOutput("settings", MODE_PRIVATE);
         ObjectOutputStream os = new ObjectOutputStream(fos);
@@ -144,13 +139,24 @@ return sharedPref.getInt("ride_id", 0);
         this.max_speed = max_speed;
     }
 
-    public double getAverage_speed() {
-        return average_speed;
+    public Location latLngToLocation(LatLng ll){
+        Location loc = new Location(LocationManager.GPS_PROVIDER);
+        loc.setLongitude(ll.longitude);
+        loc.setLatitude(ll.latitude);
+        return loc;
     }
 
-    public void setAverage_speed(double average_speed) {
-        this.average_speed = average_speed;
+    public double getAverage_speed(ArrayList<LatLng> places) {
+        for (int i = 0; i < places.size() - 1; i++){
+            Location loc1 = latLngToLocation(places.get(i));
+            Location loc2 = latLngToLocation(places.get(i + 1));
+            double speed = loc1.distanceTo(loc2) / (10 * minutes * seconds);
+            average_speed += speed;
+        }
+
+        return average_speed / (places.size() - 1);
     }
+
 
 
     public String getTires() {
