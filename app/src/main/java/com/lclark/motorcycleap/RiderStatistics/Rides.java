@@ -78,6 +78,11 @@ public class Rides implements Serializable {
 
     }
 
+    public Rides(Context context) {
+
+        startTime = System.currentTimeMillis();
+
+    }
 
     public Rides() {
     }
